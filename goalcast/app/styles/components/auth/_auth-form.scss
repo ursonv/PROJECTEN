@@ -1,0 +1,123 @@
+@use '../../variables' as *;
+
+.c-auth-form {
+    background-color: $black;
+    padding: 6rem 7.5rem;
+    width: 80%;
+    max-width: 60rem;
+    color: $white;
+    border-radius: .5rem;
+    
+    @media (max-width: 425px) {
+        padding: 3rem 2rem;
+    }
+
+    &__logo {
+        display: flex;
+        justify-content: center;
+        
+
+        &--img {
+            width: 30rem;
+            height: 100%;
+
+            @media (max-width: 425px) {
+                width: 15rem;
+                height: 100%;
+            }
+        }
+    }
+
+    &__section {
+
+        &--label {
+            font-family: $ff-titles;
+        }
+
+        &--input {
+            background-color: $secondary-color;
+            color: $white;
+            border: none;
+            font-size: 1.6rem;
+            padding: .5rem 2rem;
+            border-radius: .5rem;
+
+            &::placeholder {
+                color: $grey;
+            }
+        }
+    }
+
+    &__button {
+        background-color: $primary-color;
+        color: $white;
+        font-size: 1.6rem;
+        padding: .5rem 2rem;
+        border-radius: .5rem;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+
+    &__line-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &--line-1 {
+            height: .1rem;
+            width: 20%;
+            background-color: $white;
+        }
+        &--line-2 {
+
+            height: .1rem;
+            width: 20%;
+            background-color: $white;
+        }
+
+        @media (max-width: 425px) {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__social-btn {
+        cursor: pointer;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        &--button {
+            background-color: $primary-color;
+            color: $black;
+
+            i {
+                font-size: 2.4rem;
+            }
+
+            &:hover {
+                background-color: $black;
+                border: .1rem solid $white;
+            }
+        }
+    }
+
+    &__link {
+        &--other {
+            color: $primary-color;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 2rem;
+            font-weight: 500;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

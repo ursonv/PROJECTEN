@@ -1,0 +1,190 @@
+@use '../../variables' as *;
+
+.c-canvas-editor {
+  margin-bottom: 3rem;
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    label {
+      font-size: 1.4rem;
+      color: $white;
+      margin-bottom: 0;
+    }
+
+    select,
+    input,
+    input[type="color"],
+    .form-control,
+    .form-select {
+      background-color: $secondary-color;
+      color: $white;
+      border: none;
+      font-size: 1.6rem;
+      border-radius: 0.6rem;
+      padding: 0.4rem 1rem;
+
+      &::placeholder {
+        color: $white;
+      }
+    }
+
+    .btn {
+      font-size: 1.2rem;
+      padding: 0.4rem 1.2rem;
+
+      &.btn-outline-primary {
+        border-color: $primary-color;
+        color: $primary-color;
+
+        &:hover {
+          background-color: rgba($primary-color, 0.1);
+        }
+      }
+
+      &.btn-outline-success {
+        border-color: green;
+        color: green;
+
+        &:hover {
+          background-color: rgba(green, 0.1);
+        }
+      }
+    }
+  }
+
+  &__popup {
+    background-color: $black;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    color: $white;
+
+    h5 {
+      font-size: 1.6rem;
+      font-family: $ff-titles;
+      margin-bottom: 1rem;
+    }
+
+    .form-control {
+      background-color: $secondary-color;
+      color: $white;
+      border: none;
+    }
+
+    .form-check-label {
+      color: $grey;
+    }
+
+    .btn-sm {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__rows {
+    h5 {
+      color: $white;
+      font-family: $ff-titles;
+      margin-bottom: 1rem;
+    }
+
+    .form-control-sm {
+      background-color: $secondary-color;
+      color: $white;
+      border: none;
+    }
+
+    .btn-outline-danger {
+      border-color: red;
+      color: red;
+
+      &:hover {
+        background-color: rgba(red, 0.1);
+      }
+    }
+  }
+}
+
+.c-canvas-editor__input::placeholder{
+  color: $white;
+}
+
+.c-canvas-editor__stage-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.c-controls-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
+  }
+
+  > .c-canvas-editor__controls {
+    height: 100%;
+  }
+}
+
+.c-canvas-editor__input,
+.c-canvas-editor__popup .form-control {
+  background-color: $secondary-color;
+  color: $white;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.2rem;
+
+  &::placeholder {
+    color: rgba($white, 0.7);
+  }
+}
+
+.c-canvas-editor__popup {
+  background-color: rgba($secondary-color, 0.85);
+  border: 1px solid rgba($white, 0.06);
+  border-radius: 0.8rem;
+  padding: 1rem;
+  color: $white;
+
+  h5 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+
+  .d-flex.flex-wrap.gap-2 {
+    gap: 0.8rem !important;
+  }
+
+  .form-check-input {
+    background-color: transparent;
+    border: 1px solid rgba($white, 0.4);
+  }
+
+  .form-check-label {
+    color: rgba($white, 0.9);
+  }
+}
+
+.c-canvas-editor__rows .btn-outline-danger {
+  background-color: $primary-color;
+  color: $black;
+  border-color: $black;
+  font-weight: bolder;
+  font-size: 1.6rem;
+  padding: .1rem .4rem;
+
+  &:hover {
+    background-color: rgba($primary-color, 0.9);
+    color: $white;
+  }
+}

@@ -1,0 +1,64 @@
+@use '../../variables' as *;
+
+.c-action-form {
+    position: relative;
+    padding: 0 2rem;
+    @media (max-width: 425px) {
+        padding: 0 0.5rem;
+    }
+    &__section {
+
+        &--label {
+            font-family: $ff-titles;
+        }
+
+        &--input {
+            background-color: $black;
+            color: $white;
+            border: none;
+            font-size: 1.6rem;
+            padding: .5rem 0;
+            text-align: center;
+            border-radius: 1rem;
+
+            &::placeholder {
+                color: $grey;
+            }
+        }
+
+        &--select {
+            background-color: $secondary-color;
+            color: $white;
+            border: none;
+            font-size: 1.6rem;
+            border-radius: 1rem;
+
+            &::placeholder {
+                color: $grey;
+            }
+        }
+    }
+
+    &__button {
+        background-color: $primary-color;
+        position: absolute;
+        left: 50%; 
+        transform: translateX(-50%);
+        color: $white;
+        font-size: 1.8rem;
+        border-radius: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+
+        @media (max-width: 425px) {
+            font-size: 1.6rem;
+            width: 20rem;
+        }
+
+        &:hover {
+            background-color: rgba($primary-color, 0.9);
+        }
+    }
+}

@@ -1,0 +1,51 @@
+@use '../../variables' as *;
+
+.c-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  &__content {
+
+    background-color: $secondary-color;
+    padding: 2rem;
+    border-radius: 2rem;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    z-index: 10000;
+    border: 2px solid white;
+
+
+    h3 {
+      font-size: 2.1rem;
+      font-family: $ff-titles;
+      text-align: center;
+      padding: 2rem 0 1.5rem;
+
+      @media (max-width: 425px) {
+        font-size: 1.8rem;
+    }
+    }
+
+    &--close-button {
+      position: absolute;
+      top: 1rem;
+      right: 2.4rem;
+      font-size: 2rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: $white;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}

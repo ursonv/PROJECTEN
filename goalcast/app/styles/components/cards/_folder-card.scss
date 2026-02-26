@@ -1,0 +1,85 @@
+@use '../../variables' as *;
+
+.c-folder-card, .c-folder-card-projects {
+    display: flex;
+    align-items: center;
+    color: $white;
+    cursor: pointer;
+    &__img {
+        margin-right: 1.5rem;
+
+        @media (max-width: 425px) {
+            width: 4rem;
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+            font-family: $ff-titles;
+            font-size: 1.8rem;
+            font-weight: 500;
+            word-break: break-word;
+            @media (max-width: 425px) {
+                font-size: 1.4rem;
+            }
+        }
+
+        p {
+            margin-top: -.8rem;
+            color: $grey;
+            font-size: 1.2rem;
+            @media (max-width: 425px) {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+.c-folder-card {
+    border: .1rem solid $white;
+    border-radius: 1.5rem;
+    padding: 1rem 2rem;
+
+
+    @media (max-width: 425px) {
+        padding: 1rem;
+    }
+}
+
+.c-folder-card:hover {
+    background: rgba($primary-color,.06);
+    border: .1rem solid $white;
+    border-radius: 1.5rem;
+    padding: 1rem 2rem;
+    cursor: grab;
+
+    @media (max-width: 425px) {
+        padding: 1rem;
+    }
+}
+
+
+.c-folder-card-projects {
+    padding: .5rem 0 .5rem .5rem;
+}
+
+.c-folder-card-button {
+    background-color: $white;
+    border-radius: 50%;
+    border: none;
+    padding: .5rem;
+    margin-top: -50rem;
+
+
+    i {
+        font-size: 3rem;
+        color: $black;    
+    }
+
+    &:hover {
+        background-color: $primary-color;
+    }
+}

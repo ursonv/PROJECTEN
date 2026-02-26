@@ -1,0 +1,48 @@
+@use '../../variables' as *;
+
+.primary-button {
+    background-color: $primary-color;
+    padding: .75rem 2rem;
+    text-transform: uppercase;
+    color: $white;
+    font-family: $ff-titles;
+    font-weight: 500;
+
+    &:hover {
+        background-color: darken($primary-color, 10%);    
+    }
+
+}
+
+.secondary-button {
+    display: flex;
+
+    h2 {
+        margin-right: 1.5rem;
+    }
+
+    &__box {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: $grey;
+        i {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+        }
+
+        &:hover {
+            i {
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+    }
+}
+
+.btn-confirm {
+    color: $white;
+    font-family: $ff-titles;
+    font-size: 1.4rem;
+}

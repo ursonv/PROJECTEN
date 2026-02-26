@@ -1,0 +1,93 @@
+@use '../../variables' as *;
+
+.c-usb-card {
+  display: flex;
+  align-items: center;
+  background-color: $black;
+  border: .1rem solid $white;
+  border-radius: 1.5rem;
+  padding: 1rem 3rem;
+  color: $white;
+  cursor: pointer;
+  transition: background 0.3s;
+  position: relative;
+
+  @media (max-width: 425px) {
+    padding: 1rem 1.5rem;
+  }
+
+  &.selected {
+    background-color: $white;
+    color: $black;
+
+    .dot {
+        background-color: $black;
+    }
+  }
+
+  &__logo {
+    width: 5rem;
+    height: 4rem;
+    object-fit: contain;
+    margin-right: 1.5rem;
+    border: 1px solid $grey;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        font-family: $ff-titles;
+        font-size: 1.8rem;
+        text-transform: capitalize;
+        @media (max-width: 425px) {
+          font-size: 1.4rem;
+        }
+    }
+
+    &--status {
+      margin: 0;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+
+      .dot {
+        width: .4rem;
+        height: .4rem;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 .5rem;
+        background-color: $white;
+        @media (max-width: 425px) {
+          display: none;
+        }
+      }
+
+      .online {
+        color: $green;
+      }
+
+      .offline {
+        color: $red;
+      }
+    }
+  }
+  &__button {
+    position: absolute;
+    top: -.75rem;
+    right: -.75rem;
+    border-radius: 50%;
+    padding: .15rem .4rem;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $secondary-color;
+    background-color: $white;
+
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+}

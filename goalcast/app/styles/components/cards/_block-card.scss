@@ -1,0 +1,99 @@
+@use '../../variables' as *;
+
+.c-block-card {
+  overflow: hidden;
+  transition: transform 0.2s;
+  cursor: grab;
+
+  &__img {
+    position: relative;
+    width: 100%;
+    height: 15rem;
+    background-color: $secondary-color;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--image {
+        width: 192px;
+        height: 108px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: .5rem 1rem 0;
+
+    &--text {
+      color: $white;
+
+      h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 0rem;
+        color: $primary-color;
+        word-break: break-word;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: $grey;
+        display: flex;
+        align-items: center;
+
+        .dot {
+          display: inline-block;
+          width: 5px;
+          height: 5px;
+          background-color: $grey;
+          border-radius: 50%;
+          margin: 0 0.5rem;
+        }
+      }
+    }
+
+    &--actions {
+      display: flex;
+      margin-top: 1.2rem;
+      flex-direction: row;
+      gap: 0.5rem;
+
+      i {
+        color: $grey;
+        font-size: 1.8rem;
+        cursor: pointer;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    i {
+      color: $white;
+      font-size: 2.4rem;
+    }
+  }
+
+  &:hover &__overlay {
+    opacity: 1;
+  }
+}

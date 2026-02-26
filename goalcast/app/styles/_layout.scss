@@ -1,0 +1,40 @@
+@use '_variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: $ff-texts;
+    font-weight: $font-weight--regular;
+    font-size: 1.6rem;
+    color: $white;
+    background-color: $black;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+a {
+    text-decoration: none;
+    color: $white;
+}
+
+.highlight {
+    color: $primary-color;
+    font-size: 2rem;
+}
+
+.test {
+    color: hotpink;
+}

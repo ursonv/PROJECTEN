@@ -1,0 +1,143 @@
+@use '../../variables' as *;
+@use 'sass:color';
+
+.c-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-top: 1.6rem;
+
+  &__pagesize {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+  }
+
+  &__select {
+    width: 10rem;
+    background: transparent;
+    color: $primary-color;
+    border: 1px solid color.change($primary-color, $alpha: .4);
+    border-radius: 2rem;
+    padding: .5rem .9rem;
+    font-weight: $font-weight--bold;
+    appearance: none;
+
+    &:hover { border-color: $primary-color; }
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px color.change($primary-color, $alpha: .25);
+    }
+  }
+
+  &__label {
+    margin: 0;
+    font-weight: $font-weight--bold;
+    color: $white;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: .6rem;
+  }
+
+  &__item {
+    &--disabled .c-pager__link {
+      opacity: .45;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    background: transparent;
+    color: $primary-color;
+    border: none;
+    border-radius: 2rem;
+    padding: .6rem 1.2rem;
+    font-weight: $font-weight--bold;
+    font-size: 1.4rem;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: $white;
+      background: $primary-color;
+      outline: none;
+      box-shadow: 0 0 0 3px color.change($primary-color, $alpha: .3);
+    }
+  }
+
+  &__count {
+    user-select: none;
+    background: transparent;
+    color: $white;
+    border: 1px solid rgba($white, .2);
+    border-radius: 2rem;
+    padding: .6rem 1rem;
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .c-pager {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .8rem;
+
+    &__nav { display: flex; justify-content: flex-end; }
+  }
+}
+
+
+@media (max-width: 767.98px) {
+    .c-pager {
+      width: 100%;
+      margin-inline: auto;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2rem;
+    }
+  
+    .c-pager__pagesize {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: .8rem;
+    }
+  
+    .c-pager__nav {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  
+    .c-pager__list {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: .6rem;
+    }
+  
+    .c-pager__count,
+    .c-pager__label {
+      text-align: center;
+    }
+  
+    .c-pager__select {
+      width: 12rem;
+    }
+  }

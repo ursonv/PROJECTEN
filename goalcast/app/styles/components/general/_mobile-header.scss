@@ -1,0 +1,36 @@
+@use '../../variables' as *;
+
+.c-mobile-header {
+    background-color: $secondary-color;
+    padding: 1.2rem 1.5rem;
+
+    &__logo {
+        &--img {
+            width: 8rem;;
+            height: 100%;
+        }
+    }
+
+    &__content {
+        &--img {
+            margin-right: .5rem;
+            width: 2rem;
+            height: 2rem;
+        }
+
+        span {
+            margin-right: .75rem;
+            font-size: 1.2rem;
+        }
+
+        &--btn {
+            background-color: transparent;
+            color: $primary-color;
+            border: none;
+            i {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,63 @@
+@use '../../variables' as *;
+
+.c-header {
+  width: 82vw;
+  height: 8rem;
+  background-color: $secondary-color;
+  padding: 0 5rem;
+
+  &__content {
+    &--img {
+      margin-right: 1.5rem;
+      width: 4rem;
+      height: 4rem;
+    }
+
+    &--btn {
+      background-color: transparent;
+      color: $primary-color;
+      border: none;
+      cursor: pointer;
+      font-size: 1.8rem;
+      font-weight: $font-weight--bold;
+
+      &:hover,
+      &:focus-visible {
+        color: $white;
+        outline: none;
+      }
+    }
+
+    &--info {
+      @extend .c-header__content--btn;
+      margin-right: 1.5rem;
+    }
+
+    span {
+      margin-right: 1.5rem;
+    }
+  }
+
+  &__displayname {
+    cursor: default;
+  }
+}
+
+/* globale stylesheet */
+.react-joyride__tooltip {
+    background: $secondary-color !important;
+    color: $white !important;
+    border-radius: $border-radius !important;
+  }
+  .react-joyride__overlay { background-color: $secondary-color !important; }
+  .react-joyride__button--primary {
+    background-color: $primary-color !important;
+    color: $white !important;
+    border-radius: 2rem !important;
+  }
+  #button-primary {
+    background: transparent !important;
+    color: $white !important;
+    border-radius: 2rem !important;
+  }
+  

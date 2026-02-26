@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@lit/context": "^1.1.0",
+    "@vaadin/router": "^1.7.5",
+    "axios": "^1.6.3",
+    "date-fns": "^3.1.0",
+    "lit": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "path": "^0.12.7",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  }
+}

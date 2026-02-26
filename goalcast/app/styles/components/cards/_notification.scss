@@ -1,0 +1,51 @@
+@use '../../variables' as *;
+
+.c-notification {
+    background-color: $secondary-color;
+    list-style-type: none;
+    padding: 2rem 1rem;
+
+    &__left {
+        i {
+            font-size: 3.6rem;
+            margin-right: 1rem;
+            @media (max-width: 425px) {
+                display: none;
+            }
+        }
+
+        &--title {
+            font-size: 2.4rem;
+            font-weight: $ff-titles;
+            margin-top: 1rem;
+            font-weight: 500;
+
+            @media (max-width: 425px) {
+                font-size: 1.8rem;
+            }
+        }
+    }
+
+    &__right {
+        i {
+            padding-right: .5rem;
+        }
+        &--title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: $grey;
+        }
+    }
+
+    &__btn {
+        color: $white;
+        i {
+            font-size: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        &:hover {
+            color: $primary-color;
+        }
+    }
+}

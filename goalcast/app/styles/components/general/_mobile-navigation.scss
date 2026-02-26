@@ -1,0 +1,17 @@
+@use '../../variables' as *;
+
+.c-mobile-navbar {
+    background-color: $secondary-color;
+    height: 6rem;
+    padding: 1.4rem 0;
+
+    &__item {
+        color: $white;
+
+        &--link {
+            i {
+                font-size: 2.4rem;
+            }
+        }
+    }
+}
