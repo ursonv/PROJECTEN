@@ -1,0 +1,142 @@
+{% if not currentUser %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% block css %}
+  <style>
+    .main-content {
+        font-family: var(--Ambit-font);
+        color: #000;
+        padding: 20px;
+        margin-bottom: 100px;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: #47565D;
+      margin-bottom: 20px;
+    }
+
+    .game-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .game-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        border: 1px solid #eee;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .game-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #263238;
+        margin-bottom: 15px;
+    }
+
+    .game-detail {
+        font-size: 16px;
+        color: #47565D;
+        display: flex;
+        align-items: center; 
+        gap: 12px; 
+        margin-bottom: 8px;
+    }
+
+    .game-detail svg {
+        flex-shrink: 0; 
+        width: 24px;  
+        height: 24px;
+    }
+
+
+    .icon {
+        margin-right: 8px;
+        font-size: 18px;
+        color: var(--secondary-red);
+    }
+
+    .button-select {
+        display: inline-block;
+        text-align: center;
+        padding: 10px 20px;
+        color: var(--secondary-red);
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        background: transparent;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 0;
+        transition: color 0.2s ease;
+    }
+
+    .button-select:hover {
+        color: #b71c1c;
+        text-decoration: underline;
+    }
+
+  </style>
+{% endblock %}
+
+{% block main %}
+
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}{{ teamType }} Play Dates{% endblock %}
+  {% block button_text %}{% endblock %}
+  {% block button_link %}{% endblock %}
+{% endembed %}
+
+<main class="main-content">
+    <h2>Select a game:</h2>
+    <ul class="game-list">
+        {% set teamEntries = craft.entries.section('playDates_section').type(teamType).all() %}
+        {% for entry in teamEntries %}
+        <li class="game-card">
+            <h3 class="game-title">{{ entry.title|slice(13) }}</h3>
+            <p class="game-detail">
+                <svg id="Group_116" data-name="Group 116" xmlns="http://www.w3.org/2000/svg" width="25.967" height="25.967" viewBox="0 0 25.967 25.967">
+                  <rect id="Rectangle_85" data-name="Rectangle 85" width="25.967" height="25.967" fill="none"/>
+                  <path id="Icon_material-location-on" data-name="Icon material-location-on" d="M13.579,3A6.074,6.074,0,0,0,7.5,9.079c0,4.559,6.079,11.289,6.079,11.289s6.079-6.73,6.079-11.289A6.074,6.074,0,0,0,13.579,3Zm0,8.25A2.171,2.171,0,1,1,15.75,9.079,2.172,2.172,0,0,1,13.579,11.25Z" transform="translate(-0.541 1.445)" fill="#e30614"/>
+                </svg>
+                {{ entry.location }}
+            </p>
+            <p class="game-detail">
+                <svg id="Group_117" data-name="Group 117" xmlns="http://www.w3.org/2000/svg" width="25.967" height="25.967" viewBox="0 0 25.967 25.967">
+                  <rect id="Rectangle_86" data-name="Rectangle 86" width="25.967" height="25.967" fill="none"/>
+                  <path id="Icon_material-group" data-name="Icon material-group" d="M14.1,12.539a2.519,2.519,0,1,0-2.519-2.519A2.509,2.509,0,0,0,14.1,12.539Zm-6.718,0a2.519,2.519,0,1,0-2.519-2.519A2.509,2.509,0,0,0,7.378,12.539Zm0,1.68c-1.957,0-5.878.983-5.878,2.939v2.1H13.257v-2.1C13.257,15.2,9.335,14.218,7.378,14.218Zm6.718,0c-.244,0-.521.017-.815.042a3.544,3.544,0,0,1,1.654,2.9v2.1h5.039v-2.1C19.975,15.2,16.053,14.218,14.1,14.218Z" transform="translate(2.106 0.518)" fill="#e30614"/>
+                </svg>
+                {{ entry.p_participants.count() }}/4 players
+            </p>
+            <class class="game-detail">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16.735" height="18.577" viewBox="0 0 16.735 18.577">
+                <g id="date-range-svgrepo-com" transform="translate(1 1)">
+                  <path id="Path_643" data-name="Path 643" d="M18.735,9.446V6.684a1.842,1.842,0,0,0-1.842-1.842H5.842A1.842,1.842,0,0,0,4,6.684V9.446m14.735,0v8.288a1.842,1.842,0,0,1-1.842,1.842H5.842A1.842,1.842,0,0,1,4,17.735V9.446m14.735,0H4M7.684,3V6.684M15.051,3V6.684" transform="translate(-4 -3)" fill="none" stroke="#e30614" stroke-linecap="round" stroke-width="2"/>
+                  <rect id="Rectangle_1459" data-name="Rectangle 1459" width="2.077" height="3.116" rx="0.5" transform="translate(2.077 8.267)" fill="#e30614"/>
+                  <rect id="Rectangle_1460" data-name="Rectangle 1460" width="2.763" height="2.763" rx="0.5" transform="translate(5.986 8.288)" fill="#e30614"/>
+                  <rect id="Rectangle_1461" data-name="Rectangle 1461" width="2.077" height="3.116" rx="0.5" transform="translate(10.387 8.267)" fill="#e30614"/>
+                </g>
+              </svg>
+              {{ entry.date|date('l, j F Y') }}
+            </class>
+            </p>
+        </li>
+        <a href="{{ url('play-dates/' ~ teamType ~ '/' ~ entry.id) }}" class="button-select">SELECT</a>
+        {% endfor %}
+    </ul>
+</main>
+
+
+{% include '_shared/_navigation.twig' %}
+
+{% endblock %}

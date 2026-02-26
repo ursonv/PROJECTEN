@@ -1,0 +1,69 @@
+color: null
+fieldLayouts:
+  b53143e7-da82-42bd-a28c-cba46d1f39ca:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-01-10T02:02:00+00:00'
+            elementCondition: null
+            fieldUid: 1ae6ffbd-db4f-4e1d-832f-d47abbad3215 # User
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6c99f059-8e74-4f3a-bc67-f325024ec81e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-10T02:02:00+00:00'
+            elementCondition: null
+            fieldUid: bf4b4db1-880b-4bfc-9508-6b024122389e
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 20c60b56-5993-4579-bc7a-f78ab0dface1
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-10T02:02:00+00:00'
+            elementCondition: null
+            fieldUid: e72337c8-801c-44a4-a270-389bf9e9672c
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0829b22b-59fa-432f-94b3-13cb60c0b1b1
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 4decf7b6-1301-4f82-8d09-2f05246cf704
+        userCondition: null
+handle: reserve
+hasTitleField: false
+icon: null
+name: Reserve
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{p_user[0].fullname} - {p_reserve} - {p_selected}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

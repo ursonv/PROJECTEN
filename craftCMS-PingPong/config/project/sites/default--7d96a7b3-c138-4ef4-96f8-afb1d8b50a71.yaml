@@ -1,0 +1,8 @@
+baseUrl: $PRIMARY_SITE_URL
+handle: default
+hasUrls: true
+language: en
+name: my-craft-site
+primary: true
+siteGroup: 68a21951-68e6-4cf2-8eca-9636e2130568 # my-craft-site
+sortOrder: 1

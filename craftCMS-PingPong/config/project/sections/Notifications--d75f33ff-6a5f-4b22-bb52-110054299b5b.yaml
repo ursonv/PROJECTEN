@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  - 2dbc3b06-8fa3-4794-b5e0-a2a8f37958de # Notifications
+handle: Notifications
+maxAuthors: 1
+name: Notifications
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  7d96a7b3-c138-4ef4-96f8-afb1d8b50a71: # my-craft-site
+    enabledByDefault: true
+    hasUrls: true
+    template: notifications.twig
+    uriFormat: notifications
+type: channel

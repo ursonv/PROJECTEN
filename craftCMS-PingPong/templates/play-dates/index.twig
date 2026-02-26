@@ -1,0 +1,92 @@
+{% if not currentUser %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% block css %}
+  <style>
+    .main-content {
+      font-family: var(--Ambit-font);
+      color: #000;
+      padding: 20px;
+      margin-bottom: 100px;
+    }
+
+    h2 {
+      font-size: 20px;
+      color: #47565D;
+      margin-bottom: 20px;
+    }
+
+    .team-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .team-item {
+      margin-bottom: 15px;
+    }
+
+    .team-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      padding: 20px;
+      background-color: #FAFAFA;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .team-link:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+
+    .team-name {
+      font-size: 42px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .arrow {
+      font-size: 1.5rem;
+      color: #e53935; /* Red arrow color */
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}Play Date{% endblock %}
+  {% block button_text %}{% endblock %}
+  {% block button_link %}{% endblock %}
+{% endembed %}
+
+<main class="main-content">
+  <h2>Select a team:</h2>
+  <ul class="team-list">
+    {% for teamType in ['TeamA', 'TeamB', 'TeamC'] %}
+      <li class="team-item">
+        <a class="team-link" href="{{ url('play-dates/' ~ teamType) }}">
+          <span class="team-name">{{ teamType }}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+            <g id="Group_278" data-name="Group 278" transform="translate(-1.011)">
+              <rect id="Rectangle" width="22" height="22" rx="11" transform="translate(1.011)" fill="#e30614"/>
+              <path id="icon_navigation_chevron_right_24px" data-name="icon/navigation/chevron_right_24px" d="M.226.21a.677.677,0,0,0,0,1.01l3,2.78-3,2.78a.677.677,0,0,0,0,1.01.814.814,0,0,0,1.09,0L4.865,4.5a.677.677,0,0,0,0-1.01L1.316.2A.822.822,0,0,0,.226.21Z" transform="translate(9.465 7)" fill="#fff" stroke="#fff" stroke-width="1"/>
+            </g>
+          </svg>
+
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</main>
+
+
+{% include '_shared/_navigation.twig' %}
+
+{% endblock %}

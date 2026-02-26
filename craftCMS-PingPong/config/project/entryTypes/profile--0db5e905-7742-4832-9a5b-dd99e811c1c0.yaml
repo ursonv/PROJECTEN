@@ -1,0 +1,51 @@
+color: rose
+fieldLayouts:
+  e95ec0aa-b8c6-416a-8754-0f59174ddf8e:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2024-12-18T21:09:31+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 9c1009d9-3352-43eb-8a75-479af1dd6d87
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 227e7eea-ae96-4da8-a7fc-9e1476ec33e6
+        userCondition: null
+handle: profile
+hasTitleField: true
+icon: user
+name: Profile
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

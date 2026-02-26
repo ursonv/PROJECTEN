@@ -1,0 +1,172 @@
+{% if not currentUser.admin %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% block css %}
+    <style>
+        .main-content {
+            padding: 20px;
+            margin-bottom: 100px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--Poppins-font);
+            font-size: var(--regular-font-size);
+            color: var(--primary-black);
+        }
+
+        thead th {
+            background-color: var(--secondary-black);
+            color: var(--white);
+            font-weight: var(--font-weight-bold);
+            text-align: left;
+            padding: 12px;
+            border: 1px solid var(--grey);
+        }
+
+        tbody td {
+            padding: 10px;
+            border: 1px solid var(--grey);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: var(--grey);
+        }
+
+        tbody td a {
+            color: var(--secondary-red);
+            text-decoration: none;
+            font-weight: var(--font-weight-semi-bold);
+        }
+
+        tbody td a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            font-family: var(--Ambit-font);
+            font-size: var(--regular-font-size);
+            color: var(--secondary-black);
+        }
+
+        form {
+            font-family: var(--Poppins-font);
+            font-size: var(--regular-font-size);
+            color: var(--primary-black);
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid var(--grey);
+            border-radius: 8px;
+            background: var(--white);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: var(--font-weight-semi-bold);
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--grey);
+            border-radius: 5px;
+            font-size: var(--regular-font-size);
+            font-family: var(--Poppins-font);
+        }
+
+        select {
+            background: var(--white);
+            color: var(--primary-black);
+        }
+
+        select:focus {
+            border-color: var(--secondary-red);
+            outline: none;
+            box-shadow: 0 0 5px rgba(2, 95, 63, 0.5);
+        }
+
+        button {
+            background: var(--secondary-red);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            font-weight: var(--font-weight-bold);
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}Manage Bills{% endblock %}
+  {% block button_text %}{% endblock %}
+  {% block button_link %}{% endblock %}
+{% endembed %}
+
+<main class="main-content">
+    {% if bills is not empty %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>User</th>
+                    <th>Date Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bill in bills %}
+                    <tr>
+                        <td>{{ bill.title }}</td>
+                        <td>{{ bill.bill_status }}</td>
+                        <td>{{ bill.bill_user.one().fullname ?? 'Unknown User' }}</td>
+                        <td>{{ bill.dateCreated|date('d-m-Y H:i') }}</td>
+                        <td>
+                            <a href="{{ url('bill/detail/' ~ bill.id) }}">View</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No bills found.</p>
+    {% endif %}
+    <form method="post" action="{{ url('bill/manage/create') }}">
+        {{ csrfInput() }}
+
+        <div>
+            <label for="status">Status</label>
+            <select name="status" id="status" required>
+                <option value="open">Open</option>
+                <option value="paid">Paid</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="user">User</label>
+            <select name="user" id="user" required>
+                {% for user in craft.users.all() %}
+                    <option value="{{ user.id }}">{{ user.fullname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Create Bill</button>
+    </form>
+</main>
+{% include '_shared/_navigation.twig' %}
+{% endblock %}

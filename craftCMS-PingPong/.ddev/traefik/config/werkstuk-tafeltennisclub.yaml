@@ -1,0 +1,86 @@
+#ddev-generated
+
+http:
+  routers:
+    
+    
+    werkstuk-tafeltennisclub-web-80-http:
+      
+      rule: HostRegexp(`werkstuk-tafeltennisclub.ddev.site`, `werkstuk-tafeltennisclub.ddev.site.ddev.site`)
+      
+      service: "werkstuk-tafeltennisclub-web-80-http"
+      tls: false
+      entrypoints:
+        - http-80
+    
+    
+    werkstuk-tafeltennisclub-web-8025-http:
+      
+      rule: HostRegexp(`werkstuk-tafeltennisclub.ddev.site`, `werkstuk-tafeltennisclub.ddev.site.ddev.site`)
+      
+      service: "werkstuk-tafeltennisclub-web-8025-http"
+      tls: false
+      entrypoints:
+        - http-8025
+    
+    
+    
+    
+    
+    
+    werkstuk-tafeltennisclub-web-80-https:
+      
+      rule: HostRegexp(`werkstuk-tafeltennisclub.ddev.site`, `werkstuk-tafeltennisclub.ddev.site.ddev.site`)
+      
+      service: "werkstuk-tafeltennisclub-web-80-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-443
+    
+    
+    werkstuk-tafeltennisclub-web-8025-https:
+      
+      rule: HostRegexp(`werkstuk-tafeltennisclub.ddev.site`, `werkstuk-tafeltennisclub.ddev.site.ddev.site`)
+      
+      service: "werkstuk-tafeltennisclub-web-8025-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-8026
+    
+    
+
+  services:
+    
+    werkstuk-tafeltennisclub-web-80-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-werkstuk-tafeltennisclub-web:80
+    
+    werkstuk-tafeltennisclub-web-8025-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-werkstuk-tafeltennisclub-web:8025
+    
+    werkstuk-tafeltennisclub-web-80-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-werkstuk-tafeltennisclub-web:80
+    
+    werkstuk-tafeltennisclub-web-8025-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-werkstuk-tafeltennisclub-web:8025
+    
+
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/werkstuk-tafeltennisclub.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/werkstuk-tafeltennisclub.key
+

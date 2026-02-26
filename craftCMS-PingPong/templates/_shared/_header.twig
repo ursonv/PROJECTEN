@@ -1,0 +1,57 @@
+  {% set bill = craft.entries()
+    .section('bill_section')
+    .bill_status('open')
+    .relatedTo({
+        targetElement: currentUser.id,
+        field: 'bill_user'
+    })
+    .one() %}
+
+{% block css %}
+  <style>
+  .c-header__cart {
+    position: relative;
+  }
+
+  .c-header__cart-link {
+      display: inline-block;
+      position: relative;
+  }
+
+  .c-header__cart-badge {
+      position: absolute;
+      top: -5px; 
+      right: -10px; 
+      background-color: #1A2E35; 
+      color: #fff; 
+      border-radius: 50%;
+      padding: 3px 6px;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 1;
+      text-align: center;
+      min-width: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  </style>
+{% endblock %}
+
+<header class="c-header">
+    <div class="c-header__logo">
+        <img src="{{ url('./assets/LOGO.png') }}" alt="LOGO img" class="c-header__logo-size">
+    </div>
+    <div class="c-header__cart">
+        <a href="/bill" class="c-header__cart-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <path id="ic_local_grocery_store_24px" 
+                      d="M10.6,27.6a3.2,3.2,0,1,0,3.2,3.2A3.2,3.2,0,0,0,10.6,27.6ZM1,2V5.2H4.2L9.96,17.344,7.8,21.264A3.094,3.094,0,0,0,7.4,22.8,3.209,3.209,0,0,0,10.6,26H29.8V22.8H11.272a.4.4,0,0,1-.4-.4l.048-.192L12.36,19.6H24.28a3.185,3.185,0,0,0,2.8-1.648L32.808,7.568A1.563,1.563,0,0,0,33,6.8a1.6,1.6,0,0,0-1.6-1.6H7.736L6.232,2H1ZM26.6,27.6a3.2,3.2,0,1,0,3.2,3.2A3.2,3.2,0,0,0,26.6,27.6Z" 
+                      transform="translate(-1 -2)" 
+                      fill="#e30614"/>
+            </svg>
+            {% if bill and bill.bill_items|length > 0 %}
+                <span class="c-header__cart-badge">{{ bill.bill_items|length }}</span>
+            {% endif %}
+        </a>
+    </div>
+</header>

@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  - 0db5e905-7742-4832-9a5b-dd99e811c1c0 # Profile
+handle: profile
+maxAuthors: 1
+name: Profile
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  7d96a7b3-c138-4ef4-96f8-afb1d8b50a71: # my-craft-site
+    enabledByDefault: true
+    hasUrls: true
+    template: profile/index.twig
+    uriFormat: profile
+type: channel

@@ -1,0 +1,6 @@
+siteUid: null
+sortOrder: 1
+template: play-dates/_team
+uriParts:
+  - play-dates/<teamType>
+uriPattern: play-dates/<teamType>

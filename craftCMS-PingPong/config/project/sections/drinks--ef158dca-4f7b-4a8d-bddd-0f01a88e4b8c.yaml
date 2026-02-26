@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  - 85a03d32-7dd2-40e9-8fd0-9178e4a8450f # Drinks
+handle: drinks
+maxAuthors: 1
+name: Drinks
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  7d96a7b3-c138-4ef4-96f8-afb1d8b50a71: # my-craft-site
+    enabledByDefault: true
+    hasUrls: true
+    template: drinks/index.twig
+    uriFormat: '{slug}'
+type: channel

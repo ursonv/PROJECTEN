@@ -1,0 +1,83 @@
+color: yellow
+fieldLayouts:
+  5f98e4ff-ca70-41d0-ad89-b254fa457013:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2024-12-18T19:36:51+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 8a4b79ed-5af7-427c-8387-b8b8b2d375da
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-12-18T19:38:44+00:00'
+            elementCondition: null
+            fieldUid: 7d6462ff-0724-4fc0-bde1-222dd1b0ef21 # Price
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 6b2f2b7e-18e1-4e25-9dc7-30871f067083
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-12-28T18:37:37+00:00'
+            elementCondition: null
+            fieldUid: ce6f42af-5817-49ad-af9f-e0d1c76ebb86 # Image
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 96b7c73d-e9fd-4111-ac70-80a7ac5e08f6
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: daee8131-af31-4e71-a4cc-26a30374a6e4
+        userCondition: null
+handle: drinks
+hasTitleField: true
+icon: champagne-glass
+name: Drinks
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

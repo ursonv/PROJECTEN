@@ -1,0 +1,188 @@
+{% if not currentUser %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% set drinks = craft.entries.section('drinks').all() %}
+
+{% set games = craft.entries()
+    .section('playDates_section')
+    .date('>= now')              
+    .orderBy('date ASC')          
+    .limit(5)                      
+    .all() 
+%}
+
+{% set bill = craft.entries()
+.section('bill_section')
+.bill_status('open')
+.relatedTo({
+    targetElement: currentUser.id,
+    field: 'bill_user'
+})
+.one() %}
+
+
+{% block css %}
+    <!-- Include Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <style>
+        .c-dashboardsection__title--adminbtn {
+            padding: 0.5rem;
+            background-color: var(--secondary-red);
+            color: white;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: var(--Ambit-font);
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+
+        .c-dashboardsection__title--adminbtn:hover {
+            background-color: #b71c1c;
+        }
+
+        .c-dashboardsection__title--adminbtn svg {
+            width: 12px;
+            height: 12px;
+            margin-left: 5px;
+        }
+
+        .c-dashboardsection__card--detailsmoney {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-black);
+        }
+
+        .c-dashboardsection__card--details {
+            height: 200px;
+        }
+        .c-welcomesection__button--btn {
+            text-decoration: none;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block main %}
+
+{% include '_shared/_header.twig' %}
+
+<main class="main-content">
+    <section class="c-welcomesection">
+    {# <a href="{{ url('actions/users/logout') }}">Log Out</a> #}
+        {% set user = user ?? currentUser %}
+        <h1>Welcome, <span>{{ user.firstName }}</span>! ( {% if currentUser.admin %} ADMIN {% endif %} )</h1>
+        {% if bill and bill.bill_items|length > 0 %}
+        <div class="c-welcomesection__alert">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60.943" height="77.297" viewBox="0 0 60.943 77.297">
+            <path id="drink-icon" d="M20.053,29.749c11.518,8.867,15.628,5.371,22.222,2.117,5.054-2.484,7.035-4.849,13.176-2.359V20.491H20.059v9.258ZM5.381,5.365a18.336,18.336,0,0,1,25.917,0c.155.155.31.317.459.478l.478.373L21.226,17.231H42.679l2.484-8.376a2.124,2.124,0,0,1,1.13-1.4L56.8,1.553a2.133,2.133,0,0,1,2.08,3.725l-9.773,5.47-2.049,6.482H57.14a1.36,1.36,0,0,1,1.36,1.354h0V35.858c0,11.22-6.135,19.925-17.578,20.782V72.424h8.91c.751,0,1.354,1.192,1.354,1.937S50.564,76.3,49.832,76.3H27.411c-.751,0-1.354-1.192-1.354-1.937s.621-1.937,1.354-1.937H35.2V56.7c-11.8-.484-18.385-9.314-18.385-20.832V21.639L6.293,32.164l-.186-.242h0c-.236-.217-.472-.435-.7-.664a18.336,18.336,0,0,1,0-25.917Zm23.042.683A15.883,15.883,0,0,0,6.07,28.4L7.231,27.24A14.281,14.281,0,0,1,27.262,7.209ZM8.957,25.514l5.961-5.973H6.585A11.8,11.8,0,0,0,8.957,25.514ZM19.556,14.9l5.973-5.973a11.8,11.8,0,0,0-5.973-2.372Zm-12.971,2.2H15.4L9.187,10.9A11.8,11.8,0,0,0,6.6,17.107Zm10.556-1.726V6.57a11.8,11.8,0,0,0-6.209,2.583l6.209,6.209Z" transform="translate(0.458 0.498)" fill="#fff" stroke="#707070" stroke-width="1"/>
+            </svg>
+                <span>Woops... You have an open bill!</span>
+        </div>
+        <div class="c-welcomesection__button">
+            <a class="c-welcomesection__button--btn" href="/bill">Check your balance</a>
+        </div>
+        {% endif %}
+    </section>
+
+
+    <section class="c-dashboardsection">
+        <div class="c-dashboardsection__title">
+            <h2>UpComing games:</h2>                    
+            <a class="c-dashboardsection__title--btn" href="/play-dates">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3.818" height="6" viewBox="0 0 3.818 6">
+                <path id="icon_navigation_chevron_right_24px" data-name="icon/navigation/chevron_right_24px" d="M.17.158a.508.508,0,0,0,0,.758L2.419,3,.17,5.085a.508.508,0,0,0,0,.758.61.61,0,0,0,.818,0L3.649,3.376a.508.508,0,0,0,0-.758L.987.152A.616.616,0,0,0,.17.158Z" fill="#fff"/>
+            </svg>
+            </a>
+        </div>
+
+        <div class="owl-carousel" id="owl-events">
+            {% for game in games %}
+            <div class="item">
+                <div class="c-dashboardsection__card">
+                    <div class="c-dashboardsection__card--details">
+                    <h3>{{ game.title|slice(13) }}</h3> 
+                    <ul>
+                        <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                            <rect id="Rectangle_85" data-name="Rectangle 85" width="25" height="25" fill="none"/>
+                            <path id="Icon_material-location-on" data-name="Icon material-location-on" d="M13.352,3A5.848,5.848,0,0,0,7.5,8.852c0,4.389,5.852,10.868,5.852,10.868S19.2,13.241,19.2,8.852A5.848,5.848,0,0,0,13.352,3Zm0,7.942a2.09,2.09,0,1,1,2.09-2.09A2.091,2.091,0,0,1,13.352,10.942Z" transform="translate(-0.8 1.279)" fill="#e30614"/>
+                        </svg><span>{{ game.location }}</span>
+                        </li>
+                        <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                            <g id="Group_117" data-name="Group 117" transform="translate(0 0.039)">
+                            <rect id="Rectangle_86" data-name="Rectangle 86" width="25" height="25" transform="translate(0 -0.039)" fill="none"/>
+                            <path id="Icon_material-group" data-name="Icon material-group" d="M13.627,12.351A2.425,2.425,0,1,0,11.2,9.925,2.415,2.415,0,0,0,13.627,12.351Zm-6.468,0A2.425,2.425,0,1,0,4.734,9.925,2.415,2.415,0,0,0,7.159,12.351Zm0,1.617c-1.884,0-5.659.946-5.659,2.83v2.021H12.819V16.8C12.819,14.914,9.043,13.968,7.159,13.968Zm6.468,0c-.234,0-.5.016-.784.04A3.412,3.412,0,0,1,14.436,16.8v2.021h4.851V16.8C19.287,14.914,15.511,13.968,13.627,13.968Z" transform="translate(1.971 0.181)" fill="#e30614"/>
+                            </g>
+                        </svg><span>{{ game.p_participants.count() }}/4 players</span>
+                        </li>
+                        <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16.186" height="17.959" viewBox="0 0 16.186 17.959">
+                            <g id="date-range-svgrepo-com" transform="translate(-3 -2)">
+                            <path id="Path_643" data-name="Path 643" d="M18.186,9.206V6.546a1.773,1.773,0,0,0-1.773-1.773H5.773A1.773,1.773,0,0,0,4,6.546v2.66m14.186,0v7.98a1.773,1.773,0,0,1-1.773,1.773H5.773A1.773,1.773,0,0,1,4,17.186V9.206m14.186,0H4M7.546,3V6.546M14.639,3V6.546" fill="none" stroke="#e30614" stroke-linecap="round" stroke-width="2"/>
+                            <rect id="Rectangle_1459" data-name="Rectangle 1459" width="2" height="3" rx="0.5" transform="translate(6 10.959)" fill="#e30614"/>
+                            <rect id="Rectangle_1460" data-name="Rectangle 1460" width="2.66" height="2.66" rx="0.5" transform="translate(9.763 10.98)" fill="#e30614"/>
+                            <rect id="Rectangle_1461" data-name="Rectangle 1461" width="2" height="3" rx="0.5" transform="translate(14 10.959)" fill="#e30614"/>
+                            </g>
+                        </svg><span>{{ game.date|date('l, j F Y') }}</span>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="c-dashboardsection">
+        <div class="c-dashboardsection__title">
+            <h2>Check out our drinks!</h2>                    
+            {% if currentUser.admin %}
+                <a href="/bill/manage" class="c-dashboardsection__title--adminbtn">Beheer Bills
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 3.818 6">
+                    <path id="icon_navigation_chevron_right_24px" data-name="icon/navigation/chevron_right_24px" d="M.17.158a.508.508,0,0,0,0,.758L2.419,3,.17,5.085a.508.508,0,0,0,0,.758.61.61,0,0,0,.818,0L3.649,3.376a.508.508,0,0,0,0-.758L.987.152A.616.616,0,0,0,.17.158Z" fill="#fff"/>
+                </svg>
+                </a>
+            {% else %}
+            <a class="c-dashboardsection__title--btn" href="/drinks">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3.818" height="6" viewBox="0 0 3.818 6">
+                <path id="icon_navigation_chevron_right_24px" data-name="icon/navigation/chevron_right_24px" d="M.17.158a.508.508,0,0,0,0,.758L2.419,3,.17,5.085a.508.508,0,0,0,0,.758.61.61,0,0,0,.818,0L3.649,3.376a.508.508,0,0,0,0-.758L.987.152A.616.616,0,0,0,.17.158Z" fill="#fff"/>
+            </svg>
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="owl-carousel" id="owl-drinks">
+            {% for drink in drinks %}
+            <div class="item">
+                <div class="c-dashboardsection__card">
+                    <img src="{{ drink.image.one().url ?? '' }}" alt="{{ drink.title }}">
+                     <div class="c-dashboardsection__card--details">
+                    <h3>{{ drink.title }}</h3>
+                    <p class="c-dashboardsection__card--value">{{ drink.price | money }}<p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+ <script src="./assets/js/scripts.js"></script>
+{% include '_shared/_navigation.twig' %}
+
+{% endblock %}

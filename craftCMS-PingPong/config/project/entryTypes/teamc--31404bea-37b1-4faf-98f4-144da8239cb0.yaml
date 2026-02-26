@@ -1,0 +1,99 @@
+color: indigo
+fieldLayouts:
+  c32a864e-ae48-4ea0-b024-6c34834d2b92:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-01-07T16:59:28+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: 'Team C'
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 1611543b-2a42-430b-a163-e5095c23f518
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-07T17:01:22+00:00'
+            elementCondition: null
+            fieldUid: 59d9a8b7-80b8-465a-9855-1ebbb8adeed2 # Location
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: acdb20e2-bd9c-4e31-b212-f71edb708d5b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-07T17:01:22+00:00'
+            elementCondition: null
+            fieldUid: 8af941d5-aecb-4469-9392-3bea877dbbce # date
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e1804fbf-4abe-474b-8b0d-ffc1a9142a3e
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-11T21:44:20+00:00'
+            elementCondition: null
+            fieldUid: b757ee0c-8df3-424f-9280-cba3fa503a9a # Participants
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d84aa18d-b9b4-4462-bfdd-e953e709575a
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 3c3721e1-5a1f-4744-b426-a4453220e829
+        userCondition: null
+handle: teamc
+hasTitleField: true
+icon: null
+name: TeamC
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

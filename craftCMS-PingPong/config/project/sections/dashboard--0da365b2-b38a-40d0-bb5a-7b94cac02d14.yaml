@@ -1,0 +1,27 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  - a43f1e20-0102-4a74-80c4-7525b083341e # Dashboard
+handle: dashboard
+maxAuthors: 1
+name: Dashboard
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  7d96a7b3-c138-4ef4-96f8-afb1d8b50a71: # my-craft-site
+    enabledByDefault: true
+    hasUrls: true
+    template: index.twig
+    uriFormat: __home__
+type: channel

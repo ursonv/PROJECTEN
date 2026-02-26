@@ -1,0 +1,430 @@
+{% if not currentUser %}
+    {% redirect '/login' %}
+{% endif %}
+
+{% extends '_shared/_layout.twig' %}
+
+{% set bill = craft.entries()
+.section('bill_section')
+.bill_status('open')
+.relatedTo({
+    targetElement: currentUser.id,
+    field: 'bill_user'
+})
+.orderBy('dateCreated DESC')
+.one() %}
+
+{% block css %}
+    <style>
+        .main-content {
+            padding: 20px;
+            padding-bottom: 150px;
+            font-family: var(--Ambit-font);
+            margin-bottom: 100px;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header-row h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: var(--font-weight-semi-bold);
+            color: var(--secondary-black);
+            font-weight: bold;
+        }
+
+        .item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            background-color: #FAFAFA;
+            margin-top: 10px;
+        }
+
+        .item-details {
+            display: flex;
+            align-items: center;
+            flex: 2;
+        }
+
+        .item-details img {
+            width: 50px;
+            height: 90px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .item-details div {
+            margin-bottom: 50px;
+        }
+
+        .item-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--secondary-black);
+            margin: 0;
+        }
+
+        .item-price {
+            color: #3A444C;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .container-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;  
+            gap: 10px; 
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: right;
+        }
+
+        .quantity-controls span {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 5px 10px;
+            background-color: #E5E5E5;
+            border-radius: 5px;
+        }
+
+        .svg-btns {
+            display: flex;
+            justify-content: flex-end; 
+        }
+
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 30px; 
+            height: 30px; 
+        }
+
+        .totalcontainer {
+            margin-top: 20px;
+            background-color: #FAFAFA;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            margin-bottom: 100px;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--Ambit-font);
+            color: var(--secondary-black);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .total span:first-child {
+            text-align: left;
+            flex: 1;
+        }
+
+        .total .totalprice {
+            text-align: right;
+            flex: 1;
+            color: var(--secondary-red);
+        }
+
+        .place-order {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .place-order button {
+            background-color: #d32f2f;
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            text-transform: uppercase;
+            font-size: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .place-order button:hover {
+            background-color: #b71c1c;
+        }
+        .popup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 300px;
+                background: white;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                z-index: 1000;
+            }
+
+            .popup.active {
+                display: block;
+            }
+
+            .popup-header {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .popup-header strong {
+                color: var(--secondary-red);
+            }
+
+            .popup img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                margin-bottom: 15px;
+            }
+
+            .popup-controls {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+            }
+
+            .popup-controls button {
+                width: 30px;
+                height: 30px;
+                background: #f0f0f0;
+                border: none;
+                border-radius: 50%;
+                font-size: 1.2rem;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .popup-add {
+                display: block;
+                width: 100%;
+                background-color: var(--secondary-red);
+                color: white;
+                text-align: center;
+                padding: 10px 0;
+                border: none;
+                border-radius: 5px;
+                font-size: 1rem;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+
+            .popup-add:hover {
+                background-color: #b71c1c;
+            }
+
+            .popup-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .popup-overlay.active {
+                display: block;
+            }
+    </style>
+{% endblock %}
+
+{% block main %}
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}Bill{% endblock %}
+  {% block button_text %}{% endblock %}
+  {% block button_link %}{% endblock %}
+{% endembed %}
+
+<main class="main-content">
+
+
+  <div class="header-row">
+    <h3 style="text-align: left;">Item</h3>
+    <h3 style="text-align: right;">Quantity</h3>
+  </div>
+  {% if bill %}
+  <div class="row mb-5">
+    {% set totalPrice = 0 %}
+    {% for item in bill.bill_items %}
+    <div class="item-row">
+      <div class="item-details">
+        <img src="{{ item.image.one().url ?? '' }}" alt="{{ item.title }}">
+        <div>
+          <p class="item-title">{{ item.title }}</p>
+          <p class="item-price">€ {{ item.price.amount * item.amount / 100 }}</p>
+        </div>
+      </div>
+      <div class="container-controls">
+        <div class="quantity-controls">
+            <span>{{ item.amount }}</span>
+        </div>
+         <div class="svg-btns">
+            <button class="edit-btn" data-item-id="{{ item.id }}" data-item-amount="{{ item.amount }}" data-item-title="{{ item.title }}" data-item-image="{{ item.image.one() ? item.image.one().url : '' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+                    <g id="pencil-svgrepo-com" transform="translate(4.629 1.982)">
+                        <g id="Group_286" data-name="Group 286" transform="translate(-4.629 -1.982)">
+                        <path id="Path_644" data-name="Path 644" d="M1.319,73.225,0,80.242l7.017-1.319L26,59.94l-5.7-5.7Zm4.943,4.267-4.326.813L2.75,73.98,20.3,56.427l3.512,3.512Z" transform="translate(0 -54.242)"/>
+                        <path id="Path_645" data-name="Path 645" d="M214.1,0l-4.276,4.276,5.7,5.7L219.8,5.7Zm-2.091,4.276L214.1,2.185,217.61,5.7l-2.091,2.091Z" transform="translate(-194.272 0.204)"/>
+                        </g>
+                    </g>
+                </svg>
+            </button>
+            <form method="post" action="/bill/remove-item/{{ item.id }}">
+                {{ csrfInput() }} 
+                <button type="submit" class="delete-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24.571" height="26" viewBox="0 0 24.571 26">
+                        <path id="trash" d="M24.543,9.4l-.886,16.514A1.155,1.155,0,0,1,22.514,27H8.057a1.155,1.155,0,0,1-1.143-1.086L6.029,9.4a1.144,1.144,0,1,1,2.286-.114l.829,15.429H21.457l.829-15.429a1.13,1.13,0,1,1,2.257.114Zm3.029-3.829a1.146,1.146,0,0,1-1.143,1.143H4.143a1.143,1.143,0,1,1,0-2.286h6.286V1.857A.826.826,0,0,1,11.343,1h7.886a.826.826,0,0,1,.914.857V4.429h6.286A1.146,1.146,0,0,1,27.571,5.571ZM12.429,4.429h5.714V3H12.429ZM12.914,23h0a1.069,1.069,0,0,0,1-1.086L13.629,9.571a1.019,1.019,0,0,0-1.029-1A.977.977,0,0,0,11.629,9.6l.286,12.371A1.038,1.038,0,0,0,12.914,23Zm4.714,0a1.012,1.012,0,0,0,1-1l.286-12.343a1,1,0,0,0-2-.057l-.286,12.343a1.007,1.007,0,0,0,1,1.057Z" transform="translate(-3 -1)" fill="#e30614"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+      </div>
+    </div>
+    {% set totalPrice = totalPrice + item.price.amount * item.amount / 100 %}
+    {% endfor %}
+
+
+        <div class="popup-overlay"></div>
+            <div class="popup">
+                <div class="popup-header">Would you like to change the order quantity for <strong class="popup-drink-name">Jupiler</strong>?</div>
+                <img class="popup-drink-img" src="" alt="">
+                <span class="popup-drink-id" style="display:none;"></span>
+                <div class="popup-controls">
+                    <button class="popup-minus">-</button>
+                    <span class="popup-quantity">1</span>
+                    <button class="popup-plus">+</button>
+                </div>
+                <button class="popup-add popup-drink-id" >Update</button>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="totalcontainer">
+
+        <div class="total">
+        <span>Total</span>
+        <span class="totalprice">€ {{ totalPrice }}</span>
+        </div>
+
+        <div class="place-order">
+        <form method="post">
+            {{ csrfInput() }}
+            {{ actionInput("mollie-payments/payment/pay") }}
+            {{ redirectInput("../bill/paying") }}
+            <input type="hidden" name="amount" value="{{ totalPrice|hash }}">
+            <input type="hidden" name="form" value="{{ 'afrekenen'|hash }}">
+            <input type="hidden" id="email" name="email" value="{{ currentUser.email }}">
+            <input type="hidden" id="name" name="fields[firstName]" value="{{ currentUser.firstName }}">
+            <input type="hidden" id="name" name="fields[lastname]" value="{{ currentUser.firstName }}">
+            <input type="hidden" id="bill" name="fields[bill]" value="{{ bill.uid }}">
+            <button type="submit">
+            {{ "Place order"|t }}
+            </button>
+            
+        </form>
+        </div>
+    </div>
+
+    {% else %}
+    <p style="margin-top:10px;">Add items to your bill.</p>
+    {% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const editButtons = document.querySelectorAll('.edit-btn');
+        const popup = document.querySelector('.popup');
+        const overlay = document.querySelector('.popup-overlay');
+        const drinkNameEl = document.querySelector('.popup-drink-name');
+        const drinkIdEl = document.querySelector('.popup-drink-id');
+        const drinkImgEl = document.querySelector('.popup-drink-img');
+        const quantityEl = document.querySelector('.popup-quantity');
+        const minusBtn = document.querySelector('.popup-minus');
+        const plusBtn = document.querySelector('.popup-plus');
+        const addToCartBtn = document.querySelector('.popup-add');
+
+        let currentQuantity = 1;
+        let currentDrinkId = '';
+        let currentDrinkName = '';
+        let currentDrinkImg = '';
+
+        editButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const itemId = button.dataset.itemId;
+                const itemAmount = button.dataset.itemAmount;
+                const itemTitle = button.dataset.itemTitle;
+                const itemImage = button.dataset.itemImage;
+
+                // Vul de pop-up met de juiste informatie
+                drinkNameEl.textContent = itemTitle;
+                drinkIdEl.textContent = itemId;
+                currentDrinkId = itemId;
+                currentDrinkName = itemTitle;
+                currentDrinkImg = itemImage;
+                currentQuantity = itemAmount; // Vul de hoeveelheid van het item in
+                quantityEl.textContent = currentQuantity;
+
+                // Stel de afbeelding in
+                drinkImgEl.src = currentDrinkImg;
+
+                // Toon de pop-up
+                popup.classList.add('active');
+                overlay.classList.add('active');
+            });
+        });
+
+
+        overlay.addEventListener('click', () => {
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        minusBtn.addEventListener('click', () => {
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                quantityEl.textContent = currentQuantity;
+            }
+        });
+
+        plusBtn.addEventListener('click', () => {
+            currentQuantity++;
+            quantityEl.textContent = currentQuantity;
+        });
+
+        addToCartBtn.addEventListener('click', () => {
+            const url = `/bill/update-item?itemId=${currentDrinkId}&quantity=${currentQuantity}`;
+
+            window.location.href = url; // Redirect naar de route voor bijwerken
+
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    });
+</script>
+{% include '_shared/_navigation.twig' %}
+{% endblock %}

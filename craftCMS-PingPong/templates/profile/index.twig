@@ -1,0 +1,167 @@
+{% if not currentUser %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% block css %}
+  <style>
+    .main-content {
+      margin-bottom: 100px;
+    }
+    .profile-container {
+      padding: 20px;
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-header img {
+      width: 100px;
+      height: 100px;
+      background: #FAFAFA;
+      padding: 10px;
+    }
+
+    .profile-header h2 {
+      margin-top: 10px;
+      font-size: 24px;
+      color: var(--secondary-red);
+      font-family: var(--Ambit-font);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .profile-section, .profile-section2 {
+      margin-bottom: 20px;
+      border: 1px solid #707070;
+      border-radius: 8px;
+      padding: 15px;
+      background: #FAFAFA;
+    }
+
+    .profile-section h3, .profile-section2 h3 {
+      font-size: 20px;
+      color: var(--secondary-black);
+      font-family: var(--Ambit-font);
+      margin-bottom: 10px;
+    }
+
+    .profile-section p {
+      display: flex;
+    }
+
+    .profile-section p, .profile-section2 p {
+      margin: 5px 0;
+      font-size: 18px;
+      font-family: var(--Ambit-font);
+      color: var(--secondary-black);
+    }
+
+    .profile-section p strong, .profile-section2 p strong {
+      color: var(--secondary-red);
+      margin-left: 5px;
+    }
+
+    .profile-section svg {
+      margin-right: 8px;
+      width: 22px;
+      height: 22px;
+      fill: var(--secondary-red);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+    }
+
+    ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      font-family: var(--Ambit-font);
+
+    }
+
+    ul li svg {
+      margin-right: 10px;
+      width: 22px;
+      height: 22px;
+    }
+
+    ul li span {
+      font-size: 14px;
+      color: var(--secondary-black);
+      font-size: 18px;
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}Profile{% endblock %}
+  {% block button_text %}Edit{% endblock %}
+  {% block button_link %}profile/edit{% endblock %}
+{% endembed %}
+
+{% set user = user ?? currentUser %}
+
+<main class="main-content profile-container">
+
+  <div class="profile-header">
+    <img src="assets/img/default-user.webp" alt="Profile Picture">
+    <h2>{{ user.fullName }}</h2>
+  </div>
+
+  <div class="profile-section">
+    <h3>Favorite Team:</h3>
+    <p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+        <path id="Path_646" data-name="Path 646" d="M20.941,8.431a.584.584,0,0,0-.494-.4l-6.71-.681L11.016,1.18a.581.581,0,0,0-1.063,0L7.231,7.351l-6.709.68A.582.582,0,0,0,.194,9.044l5.027,4.5L3.8,20.13a.581.581,0,0,0,.568.7.575.575,0,0,0,.292-.08l5.829-3.393,5.828,3.393a.583.583,0,0,0,.861-.627l-1.425-6.591,5.028-4.5A.577.577,0,0,0,20.941,8.431ZM14.721,12.9a.581.581,0,0,0-.181.556l1.218,5.633-4.982-2.9a.578.578,0,0,0-.585,0l-4.983,2.9,1.218-5.633a.581.581,0,0,0-.181-.556L1.95,9.056l5.735-.582a.582.582,0,0,0,.473-.344l2.326-5.274L12.81,8.13a.582.582,0,0,0,.473.344l5.735.582Z" transform="translate(0 -0.834)" />
+      </svg>
+    Ploeg A</p>
+  </div>
+
+  <div class="profile-section">
+    <h3>You’re Balance:</h3>
+    <p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+          <path id="euro-circle-svgrepo-com" d="M17.444,9.6a4.79,4.79,0,0,0-3.927-2.16c-2.74,0-4.961,2.487-4.961,5.556s2.221,5.556,4.961,5.556a4.79,4.79,0,0,0,3.927-2.16m-10-5.062h4.444M7.444,14.667h4.444M23,13A10,10,0,1,1,13,3,10,10,0,0,1,23,13Z" transform="translate(-2 -2)" fill="none" stroke="#e30614" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </svg>
+    You’re balance is <strong>12,00€</strong>!</p>
+  </div>
+
+  <div class="profile-section2">
+    <h3>Upcoming Play Date:</h3>
+    <ul>
+        <li>
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+            <rect id="Rectangle_85" data-name="Rectangle 85" width="25" height="25" fill="none"/>
+            <path id="Icon_material-location-on" data-name="Icon material-location-on" d="M13.352,3A5.848,5.848,0,0,0,7.5,8.852c0,4.389,5.852,10.868,5.852,10.868S19.2,13.241,19.2,8.852A5.848,5.848,0,0,0,13.352,3Zm0,7.942a2.09,2.09,0,1,1,2.09-2.09A2.091,2.091,0,0,1,13.352,10.942Z" transform="translate(-0.8 1.279)" fill="#e30614"/>
+        </svg><span>Rooigem D / Thuis</span>
+        </li>
+        <li>
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+            <g id="Group_117" data-name="Group 117" transform="translate(0 0.039)">
+            <rect id="Rectangle_86" data-name="Rectangle 86" width="25" height="25" transform="translate(0 -0.039)" fill="none"/>
+            <path id="Icon_material-group" data-name="Icon material-group" d="M13.627,12.351A2.425,2.425,0,1,0,11.2,9.925,2.415,2.415,0,0,0,13.627,12.351Zm-6.468,0A2.425,2.425,0,1,0,4.734,9.925,2.415,2.415,0,0,0,7.159,12.351Zm0,1.617c-1.884,0-5.659.946-5.659,2.83v2.021H12.819V16.8C12.819,14.914,9.043,13.968,7.159,13.968Zm6.468,0c-.234,0-.5.016-.784.04A3.412,3.412,0,0,1,14.436,16.8v2.021h4.851V16.8C19.287,14.914,15.511,13.968,13.627,13.968Z" transform="translate(1.971 0.181)" fill="#e30614"/>
+            </g>
+        </svg><span>3/4 spelers</span>
+        </li>
+        <li>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16.186" height="17.959" viewBox="0 0 16.186 17.959">
+            <g id="date-range-svgrepo-com" transform="translate(-3 -2)">
+            <path id="Path_643" data-name="Path 643" d="M18.186,9.206V6.546a1.773,1.773,0,0,0-1.773-1.773H5.773A1.773,1.773,0,0,0,4,6.546v2.66m14.186,0v7.98a1.773,1.773,0,0,1-1.773,1.773H5.773A1.773,1.773,0,0,1,4,17.186V9.206m14.186,0H4M7.546,3V6.546M14.639,3V6.546" fill="none" stroke="#e30614" stroke-linecap="round" stroke-width="2"/>
+            <rect id="Rectangle_1459" data-name="Rectangle 1459" width="2" height="3" rx="0.5" transform="translate(6 10.959)" fill="#e30614"/>
+            <rect id="Rectangle_1460" data-name="Rectangle 1460" width="2.66" height="2.66" rx="0.5" transform="translate(9.763 10.98)" fill="#e30614"/>
+            <rect id="Rectangle_1461" data-name="Rectangle 1461" width="2" height="3" rx="0.5" transform="translate(14 10.959)" fill="#e30614"/>
+            </g>
+        </svg><span>2 febr 2025, 10u</span>
+        </li>
+    </ul>
+  </div>
+</main>
+
+{% include '_shared/_navigation.twig' %}
+
+{% endblock %}

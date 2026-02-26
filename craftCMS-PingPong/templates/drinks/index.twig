@@ -1,0 +1,346 @@
+    {% if not currentUser %}
+        {% redirect '/login' %}
+    {% endif %}
+
+    {% extends '_shared/_layout.twig' %}
+    {% set drinks = craft.entries.section('drinks').all() %}
+    {% set bill = craft.entries()
+        .section('bill_section')
+        .bill_status('open')
+        .relatedTo({
+            targetElement: currentUser.id,
+            field: 'bill_user'
+        })
+        .orderBy('dateCreated DESC')
+        .one() %}
+
+    {% block css %}
+        <style>
+            .main-content {
+                padding: 20px;
+                margin-bottom: 100px;
+            }
+
+            .drink-header {
+                text-align: center;
+                color: var(--secondary-black);
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .drink-header strong {
+                color: var(--secondary-red);
+            }
+
+            .drink-grid {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                justify-items: center;
+                align-items: start;
+            }
+
+            .drink-card {
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                text-align: center;
+                width: 150px;
+                padding: 10px;
+                background-color: #f0f0f0;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .drink-card img {
+                width: 100%; 
+                height: 120px; 
+                object-fit: cover;
+                border-radius: 10px; 
+            }
+
+            .drink-card h3 {
+                margin: 5px 0;
+                font-size: 1rem;
+                font-family: var(--Ambit-font);
+                font-weight: var(--font-weight-bold);
+                color: var(--secondary-black);
+            }
+
+            .drink-card p {
+                font-size: 0.9rem;
+                font-family: var(--Poppins-font);
+                font-weight: var(--font-weight-semi-bold);
+                color: #3A444C;
+            }
+
+            .drink-card .btn-card {
+                text-decoration: none;
+                display: inline-block;
+                background-color: var(--secondary-red);
+                color: var(--white);
+                padding: 5px 10px;
+                font-size: 0.9rem;
+                border: none;
+                margin-top: 5px;
+                border-radius: 15px;
+                cursor: pointer;
+                text-transform: uppercase;
+                transition: background-color 0.3s;
+            }
+
+            .drink-card .btn-card:hover {
+                background-color: #b71c1c;
+            }
+
+            @media (max-width: 768px) {
+                .drink-card img {
+                    width: 60%;
+                }
+
+                .drink-grid {
+                    gap: 10px;
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .drink-card {
+                    width: 100%;
+                    max-width: 150px;
+                    padding: 10px;
+                }
+
+
+                .drink-card .btn-card {
+                    font-size: 0.8rem;
+                }
+
+                .drink-card img {
+                    height: 120px; 
+                }
+            }
+
+            @media (min-width: 768px) and (max-width: 1199px) {
+                .drink-grid {
+                    gap: 20px;
+                    grid-template-columns: repeat(4, 1fr); 
+                }
+
+                .drink-card {
+                    width: 100%;
+                    max-width: 250px;
+                    padding: 15px;
+                }
+
+                .drink-card img {
+                    height: 150px;
+                }
+            }
+
+            @media (min-width: 1200px) {
+                .drink-grid {
+                    gap: 30px;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                }
+
+                .drink-card {
+                    max-width: 300px;
+                    padding: 20px;
+                }
+
+                .drink-card img {
+                    height: 200px;
+                }
+            }
+
+            .popup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 300px;
+                background: white;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                z-index: 1000;
+            }
+
+            .popup.active {
+                display: block;
+            }
+
+            .popup-header {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .popup-header strong {
+                color: var(--secondary-red);
+            }
+
+            .popup img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                margin-bottom: 15px;
+            }
+
+            .popup-controls {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+            }
+
+            .popup-controls button {
+                width: 30px;
+                height: 30px;
+                background: #f0f0f0;
+                border: none;
+                border-radius: 50%;
+                font-size: 1.2rem;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .popup-add {
+                display: block;
+                width: 100%;
+                background-color: var(--secondary-red);
+                color: white;
+                text-align: center;
+                padding: 10px 0;
+                border: none;
+                border-radius: 5px;
+                font-size: 1rem;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+
+            .popup-add:hover {
+                background-color: #b71c1c;
+            }
+
+            .popup-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .popup-overlay.active {
+                display: block;
+            }
+        </style>
+    {% endblock %}
+
+    {% set value = entry.price|money %}
+
+    {% block main %}
+    {% include '_shared/_header.twig' %}
+    <main class="main-content">
+        {% set user = user ?? currentUser %}
+        <h1 class="drink-header">Hello <strong>{{ user.firstName }}</strong>, which drink would you like to drink today?</h1>
+        
+        <div class="drink-grid">
+            {% for drink in drinks %}
+            <div class="drink-card">
+                <img src="{{ drink.image.one().url ?? '' }}" alt="{{ drink.title }}">
+                <h3>{{ drink.title }}</h3>
+                <p>{{ value }}</p>
+
+                <button class="btn-card" data-drink-id="{{ drink.id }}" data-drink-name="{{ drink.title }}" data-drink-img="{{ drink.image.one().url ?? '' }}">Add to cart</button>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="popup-overlay"></div>
+            <div class="popup">
+                <div class="popup-header">How many <strong class="popup-drink-name">Jupiler</strong> do you want?</div>
+                <img class="popup-drink-img" src="" alt="">
+                <span class="popup-drink-id"></span>
+                <div class="popup-controls">
+                    <button class="popup-minus">-</button>
+                    <span class="popup-quantity">1</span>
+                    <button class="popup-plus">+</button>
+                </div>
+                <button class="popup-add popup-drink-id" >Add to Cart</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.drink-card button');
+            const popup = document.querySelector('.popup');
+            const overlay = document.querySelector('.popup-overlay');
+            const drinkNameEl = document.querySelector('.popup-drink-name');
+            const drinkIdEl = document.querySelector('.popup-drink-id');
+            const drinkImgEl = document.querySelector('.popup-drink-img');
+            const quantityEl = document.querySelector('.popup-quantity');
+            const minusBtn = document.querySelector('.popup-minus');
+            const plusBtn = document.querySelector('.popup-plus');
+            const addToCartBtn = document.querySelector('.popup-add');
+
+            let currentQuantity = 2;
+            let currentDrinkId = '';
+            let currentDrinkName = '';
+            let currentDrinkImg = '';
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const drinkName = button.dataset.drinkName;
+                    const drinkImg = button.dataset.drinkImg;
+                    const drinkId = button.dataset.drinkId;
+
+                    // Vul de pop-up met de juiste informatie
+                    drinkNameEl.textContent = drinkName;
+                    drinkImgEl.src = drinkImg;
+                    currentDrinkId = drinkId; // Sla het drink-ID op
+                    currentDrinkName = drinkName; // Sla de naam op
+                    currentDrinkImg = drinkImg; // Sla de afbeelding op
+                    currentQuantity = 1; // Reset de hoeveelheid naar 1
+                    quantityEl.textContent = currentQuantity;
+
+                    // Toon de pop-up
+                    popup.classList.add('active');
+                    overlay.classList.add('active');
+                });
+            });
+
+            overlay.addEventListener('click', () => {
+                popup.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            minusBtn.addEventListener('click', () => {
+                if (currentQuantity > 1) {
+                    currentQuantity--;
+                    quantityEl.textContent = currentQuantity;
+                }
+            });
+
+            plusBtn.addEventListener('click', () => {
+                currentQuantity++;
+                quantityEl.textContent = currentQuantity;
+            });
+
+            addToCartBtn.addEventListener('click', () => {
+                const url = `/bill/add-item?drink=${currentDrinkId}&quantity=${currentQuantity}`;
+                
+                window.location.href = url;
+
+                //console.log(`Added ${currentQuantity} ${drinkNameEl.textContent} to cart.`);
+                popup.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
+
+    {% include '_shared/_navigation.twig' %}
+    {% endblock %}

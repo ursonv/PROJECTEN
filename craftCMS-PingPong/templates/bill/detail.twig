@@ -1,0 +1,164 @@
+{% extends '_shared/_layout.twig' %}
+
+{% block css %}
+    <style>
+        .main-content {
+            font-family: var(--Poppins-font);
+            font-size: var(--regular-font-size);
+            color: var(--primary-black);
+            max-width: 600px;
+            margin: 10px auto 150px;
+            padding: 30px;
+            border: 1px solid var(--grey);
+            border-radius: 12px;
+            background: var(--white);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: var(--secondary-red);
+            font-family: var(--Ambit-font);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        p strong {
+            color: var(--secondary-black);
+            font-weight: var(--font-weight-semi-bold);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 10px;
+            border-bottom: 1px solid var(--grey);
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        form {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid var(--grey);
+            border-radius: 8px;
+            background: var(--white);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: var(--font-weight-semi-bold);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--grey);
+            border-radius: 6px;
+            font-size: var(--regular-font-size);
+        }
+
+        select {
+            background: var(--white);
+            color: var(--primary-black);
+        }
+
+        button {
+            background: var(--secondary-red);
+            color: var(--white);
+            border: none;
+            font-weight: var(--font-weight-bold);
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        .total-price {
+            font-size: 1.2rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--green);
+            margin-top: 15px;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}Bill #{{ bill.id }}{% endblock %}
+  {% block button_text %}{% endblock %}
+  {% block button_link %}{% endblock %}
+{% endembed %}
+<main class="main-content">
+    <h1>Bill Details</h1>
+
+    <p><strong>Title:</strong> {{ bill.title }}</p>
+    <p><strong>Status:</strong> {{ bill.bill_status }}</p>
+    <p><strong>User:</strong> {{ bill.bill_user.one().fullname ?? 'Unknown User' }}</p>
+    <p><strong>Date Created:</strong> {{ bill.dateCreated|date('d-m-Y H:i') }}</p>
+
+    <h2>Items</h2>
+    {% set totalPrice = 0 %}
+    {% if bill.bill_items|length > 0 %}
+        <ul>
+            {% for item in bill.bill_items.all() %}
+                <li>
+                    {{ item.title }} - {{ item.amount }} pcs - €{{ (item.price.amount * item.amount / 100)|number_format(2, ',', '.') }}
+                </li>
+                {% set totalPrice = totalPrice + (item.price.amount * item.amount / 100) %}
+            {% endfor %}
+        </ul>
+
+        <!-- Totale prijs weergeven -->
+        <p><strong>Total Price:</strong> €{{ totalPrice|number_format(2, ',', '.') }}</p>
+    {% else %}
+        <p>No items found for this bill.</p>
+    {% endif %}
+
+    <!-- Toon de betaalknop alleen als de status 'open' is -->
+    {% if bill.bill_status == 'open' %}
+        <form method="post">
+            {{ csrfInput() }}
+            {{ actionInput("mollie-payments/payment/pay") }}
+            {{ redirectInput("/bill/payingid") }}
+            <input type="hidden" name="amount" value="{{ totalPrice|hash }}">
+            <input type="hidden" name="form" value="{{ 'afrekenen'|hash }}">
+            <input type="hidden" id="email" name="email" value="{{ bill.bill_user.one().email }}">
+            <input type="hidden" id="firstname" name="firstName" value="{{ bill.bill_user.one().firstName }}">
+            <input type="hidden" id="lastname" name="lastName" value="{{ bill.bill_user.one().lastName }}">
+            <input type="hidden" id="bill" name="billid" value="{{ bill.uid }}">
+            <button type="submit">
+                {{ "Pay off bill"|t }}
+            </button>
+        </form>
+
+        <form method="post" action="{{ url('bill/detail/' ~ bill.id ~ '/add-drink') }}">
+            {{ csrfInput() }}
+            <label for="drink">Add a drink:</label>
+            <select name="drink" id="drink">
+                {% for drink in availableDrinks %}
+                    <option value="{{ drink.id }}">{{ drink.title }} ({{ drink.price|money }})</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Add Drink</button>
+        </form>
+    {% endif %}
+
+
+</main>
+{% include '_shared/_navigation.twig' %}
+{% endblock %}

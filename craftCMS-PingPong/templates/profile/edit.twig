@@ -1,0 +1,226 @@
+{% if not currentUser %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% block css %}
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 1rem;
+            margin-bottom: 100px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            width: 100%;     
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: -15rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        label {
+            font-size: 1rem;
+            font-family: var(--Poppins-font);
+            margin-bottom: 0.5rem;
+            color: var(--secondary-black);
+            font-weight: var(--font-weight-bold);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            font-family: var(--Poppins-font);
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            font-size: 1rem;
+        }
+
+        input.error {
+            border: 1px solid #e74c3c;
+            background-color: #f8d7da;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--secondary-red);
+            color: white;
+            margin-top: 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: var(--Ambit-font);
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        .errors {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+        }
+
+        .errors li {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .error-list {
+            margin-top: 1rem;
+        }
+
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-header img {
+            width: 100px;
+            height: 100px;
+            background: #FAFAFA;
+            padding: 10px;
+        }
+
+        .profile-header h2 {
+            margin-top: 10px;
+            font-size: 24px;
+            color: var(--secondary-red);
+            font-family: var(--Ambit-font);
+            font-weight: var(--font-weight-bold);
+        }
+
+        select {
+            font-family: var(--Poppins-font);
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            font-size: 1rem;
+        }
+
+        select.error {
+            border: 1px solid #e74c3c;
+            background-color: #f8d7da;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block main %}
+
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}Edit Profile{% endblock %}
+  {% block button_text %}{% endblock %}
+  {% block button_link %}{% endblock %}
+{% endembed %}
+
+<main>
+    <div class="main-content">
+
+        {% macro errorList(errors) %}
+        {% if errors %}
+            <ul class="errors">
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endmacro %}
+
+        {% set user = user ?? currentUser %}
+
+        {% if user.hasErrors() %}
+        <div class="error-message">
+            <p>Unable to save your profile.</p>
+        </div>
+        {% endif %}
+
+        <form method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+            {{ csrfInput() }}
+            {{ actionInput('users/save-user') }}
+            {{ hiddenInput('userId', user.id) }}
+            {{ redirectInput('profile') }}
+
+            <div class="profile-header">
+                <img src="{{ url('./assets/img/default-user.webp') }}" alt="Profile Picture">
+                <h2>{{ user.fullName }}</h2>
+            </div>
+
+            <label for="email" style="display:none;">Email</label>
+            {{ input('text', 'email', user.unverifiedEmail ?? user.email, {
+                placeholder: 'Edit e-mail',
+                id: 'email',
+                class: user.hasErrors('email') ? 'error',
+                autocomplete: 'email',
+            }) }}
+            {{ _self.errorList(user.getErrors('username')) }}
+
+            <label for="current-password" style="display:none;">Current Password</label>
+            {{ input('password', 'password', null, {
+                placeholder: 'Enter current password',
+                id: 'current-password',
+                class: user.hasErrors('currentPassword') ? 'error',
+                autocomplete: 'current-password',
+            }) }}
+            {{ _self.errorList(user.getErrors('currentPassword')) }}
+
+            <label for="new-password" style="display:none;">New Password</label>
+            {{ input('password', 'newPassword', null, {
+                placeholder: 'Enter new password',
+                id: 'new-password',
+                class: user.hasErrors('newPassword') ? 'error',
+                autocomplete: 'new-password',
+            }) }}
+            {{ _self.errorList(user.getErrors('newPassword')) }}
+            
+            {# <label for="favorite-team">Favorite Team:</label>
+            <select id="favorite-team" name="favoriteTeam" class="{{ user.hasErrors('favoriteTeam') ? 'error' }}">
+                <option value="">Select a Team</option>
+                <option value="team1">Team 1</option>
+                <option value="team2">Team 2</option>
+                <option value="team3">Team 3</option>
+                <option value="team4">Team 4</option>
+            </select>
+            {{ _self.errorList(user.getErrors('favoriteTeam')) }} #}
+
+            <button>Edit Profile</button>
+        </form>
+    </div>
+</main>
+
+{% include '_shared/_navigation.twig' %}
+{% endblock %}

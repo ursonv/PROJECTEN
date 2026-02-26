@@ -1,0 +1,68 @@
+{% if not currentUser %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% block main %}
+
+<main>
+    <div>
+        <form method="post">
+            {{ csrfInput() }}
+            {{ actionInput("mollie-payments/payment/pay") }}
+            {{ redirectInput("bill/paying") }}
+            <input type="hidden" name="amount" value="{{ 20|hash }}">
+            <input type="hidden" name="form" value="{{ 'afrekenen'|hash }}">
+            <input type="hidden" id="email" name="email" value="ursonvermeersch@hotmail.com">
+            <input type="hidden" id="name" name="fields[firstName]" value="Urson Vermeersch">
+
+            <div>
+                <h3>{{ "Pay bill"|t }}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vandaag</th>
+                            <th>€ 7,50</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aquarius</td>
+                            <td>2</td>
+                            <td>€ 2,50</td>
+                            <td>€ 5,00</td>
+                        </tr>
+                        <tr>
+                            <td>Cola</td>
+                            <td>1</td>
+                            <td>€ 2,50</td>
+                            <td>€ 2,50</td>
+                        </tr>
+                        <tr>
+                            <th>17 oktober</th>
+                            <th>€ 2,50</th>
+                        </tr>
+                        <tr>
+                            <td>Aquarius</td>
+                            <td>1</td>
+                            <td>€ 2,50</td>
+                            <td>€ 2,50</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Totaal</th>
+                            <th>€ 10,00</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <button type="submit">
+                {{ "Pay"|t }}
+            </button>
+        </form>
+    </div>
+</main>
+{% include '_shared/_navigation.twig' %}
+{% endblock %}

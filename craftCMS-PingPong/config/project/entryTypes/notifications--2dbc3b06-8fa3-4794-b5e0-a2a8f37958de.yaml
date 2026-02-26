@@ -1,0 +1,51 @@
+color: green
+fieldLayouts:
+  b70fec66-a2a2-4aad-9950-05679121cce2:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2024-12-18T20:51:13+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: a5cc2c0d-dac2-44db-9f74-717024a54be8
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: d7da9fa6-4f9d-481b-b374-57b32f057044
+        userCondition: null
+handle: notifications
+hasTitleField: true
+icon: bell
+name: Notifications
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

@@ -1,0 +1,20 @@
+{% if not currentUser %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% block main %}
+
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}Notifications{% endblock %}
+  {% block button_text %}Select{% endblock %}
+  {% block button_link %}{% endblock %}
+{% endembed %}
+
+  <main class="main-content">
+    <!-- Jouw inhoud hier -->
+  </main>
+
+  {% include '_shared/_navigation.twig' %}
+
+{% endblock %}

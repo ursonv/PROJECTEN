@@ -1,0 +1,29 @@
+<header class="c-headertitle">
+  <div class="c-headertitle__return" onclick="handleBackNavigation()" role="button" aria-label="Go back">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+      <g id="Group_278" data-name="Group 278" transform="translate(22.011 22) rotate(180)">
+        <rect id="Rectangle" width="22" height="22" rx="11" transform="translate(0.011)" fill="#e30614"/>
+        <path id="icon_navigation_chevron_right_24px" data-name="icon/navigation/chevron_right_24px" d="M.226.21a.677.677,0,0,0,0,1.01l3,2.78-3,2.78a.677.677,0,0,0,0,1.01.814.814,0,0,0,1.09,0L4.865,4.5a.677.677,0,0,0,0-1.01L1.316.2A.822.822,0,0,0,.226.21Z" transform="translate(9.654 7.334)" fill="#fff"/>
+      </g>
+    </svg>
+  </div>
+  
+  <div class="c-headertitle__title">
+    {% block page_title %}-{% endblock %}
+  </div>
+
+  <div class="c-headertitle__button">
+    <a href="{% block button_link %}{% endblock %}">{% block button_text %}{% endblock %}</a>
+  </div>
+</header>
+
+<script>
+  function handleBackNavigation() {
+    if (window.location.pathname === "/bill") {
+      window.location.href = "/drinks"; 
+    } 
+    else {
+      window.history.back(); 
+    }
+  }
+</script>

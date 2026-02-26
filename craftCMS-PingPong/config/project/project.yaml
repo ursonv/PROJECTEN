@@ -1,0 +1,102 @@
+dateModified: 1736647338
+email:
+  fromEmail: ursonvermeersch@hotmail.com
+  fromName: my-craft-site
+  replyToEmail: null
+  template: _emails/email.twig
+  transportSettings:
+    host: $MAILPIT_SMTP_HOSTNAME
+    password: ''
+    port: $MAILPIT_SMTP_PORT
+    useAuthentication: '0'
+    username: ''
+  transportType: craft\mail\transportadapters\Smtp
+fs:
+  img:
+    hasUrls: true
+    name: img
+    settings:
+      path: '@assetBasePath/images'
+    type: craft\fs\Local
+    url: '@assetBaseUrl/images'
+meta:
+  __names__:
+    0b8f4b52-973b-4a0a-a7af-4b68d0e1a6e5: 'Bill Items' # Bill Items
+    0c7c18c2-c02d-4da7-8476-d118f45c05b4: images # images
+    0c9f4831-6e3e-40b2-988c-3bc2ef2748f7: Participants # Participants
+    0da365b2-b38a-40d0-bb5a-7b94cac02d14: Dashboard # Dashboard
+    0db5e905-7742-4832-9a5b-dd99e811c1c0: Profile # Profile
+    1ae6ffbd-db4f-4e1d-832f-d47abbad3215: User # User
+    1f405637-aeb8-4555-80dc-13d06977fa08: Amount # Amount
+    2dbc3b06-8fa3-4794-b5e0-a2a8f37958de: Notifications # Notifications
+    3afce2cf-32b2-470d-9738-d43d048391af: Drink # Drink
+    6c2e115e-65e2-4708-87ea-52329ee79382: Bills # Bills
+    6f3532f7-192a-4419-9d68-03608468d7fb: Participations # Participations
+    7d96a7b3-c138-4ef4-96f8-afb1d8b50a71: my-craft-site # my-craft-site
+    7d6462ff-0724-4fc0-bde1-222dd1b0ef21: Price # Price
+    7da6e7b1-6f53-47b7-956d-5517fc2292a3: Cantplay # Cantplay
+    8af941d5-aecb-4469-9392-3bea877dbbce: date # date
+    25f7a1e2-a2f5-4dc8-a149-5b6c69abba64: TeamA # TeamA
+    34b6e3ff-c93c-45a0-b232-cb81b8fee4d1: Participations # Participations
+    59d9a8b7-80b8-465a-9855-1ebbb8adeed2: Location # Location
+    68a21951-68e6-4cf2-8eca-9636e2130568: my-craft-site # my-craft-site
+    73c51156-4159-494b-a2d9-dbe8cf794a05: TeamB # TeamB
+    85a03d32-7dd2-40e9-8fd0-9178e4a8450f: Drinks # Drinks
+    85afafc5-d2f9-4580-82d7-e75f0b7a9398: Participants # Participants
+    134bea2e-7cc0-4c3c-9774-a0f2279425e6: Canyouplay # Canyouplay
+    304abebb-950f-48de-8b23-41c825269a73: Reserve # Reserve
+    534cd3d8-8d75-4d6c-91e8-7c10ce619b57: 'Bill Status' # Bill Status
+    926c3620-60da-4e01-a5b8-273754b12786: 'Public Schema' # Public Schema
+    3222a852-41fb-4b95-ac37-b08411a22439: 'Stash User' # Stash User
+    8380d91f-9d13-4875-a25a-90be1e4e149f: Stash # Stash
+    31404bea-37b1-4faf-98f4-144da8239cb0: TeamC # TeamC
+    18777010-1b1b-4acb-95e5-ce697450dd81: Profile # Profile
+    a43f1e20-0102-4a74-80c4-7525b083341e: Dashboard # Dashboard
+    b2e9e9b0-5362-4473-9de3-6a89f4c51b90: paymentid # paymentid
+    b6daa623-9de2-49ec-a24b-7371bd85b2b5: 'Play Dates' # Play Dates
+    b7b3b290-d51f-420b-99d6-08e1eb7830b8: Referentie # Referentie
+    b757ee0c-8df3-424f-9280-cba3fa503a9a: Participants # Participants
+    b118554f-a665-48c5-aca1-41663a04e94f: 'Bill Items' # Bill Items
+    be8f3539-f760-4b83-a44f-c8a6e5188589: Bill # Bill
+    c294ce45-3bcf-4331-8a2b-11c488140b25: Reserve # Reserve
+    cb7a7eb9-bf0d-4680-9bf4-dfa9fcc16b5b: SVG # SVG
+    ce6f42af-5817-49ad-af9f-e0d1c76ebb86: Image # Image
+    d75f33ff-6a5f-4b22-bb52-110054299b5b: Notifications # Notifications
+    e6a39c50-a029-4b54-a9fd-63069a24de0f: drinkimage # drinkimage
+    e2384612-f76e-4b16-8af1-9da3e99283ba: Items # Items
+    ef158dca-4f7b-4a8d-bddd-0f01a88e4b8c: Drinks # Drinks
+    f06ec311-a9a6-41c1-9ee1-d9e34fe6aa82: Status # Status
+    fa7f1bcf-99a0-44a5-add2-2b31a5641771: test # test
+    fbee3995-7978-4a88-a365-128ac4757d47: 'Bill User' # Bill User
+plugins:
+  feed-me:
+    edition: standard
+    enabled: true
+    schemaVersion: 5.1.1
+  mollie-payments:
+    edition: standard
+    enabled: true
+    licenseKey: Z0W3ICJ0T4WN2UTYZNNZJZZ9
+    schemaVersion: 5.0.0
+    settings:
+      apiKey: test_4Q7B36x59SjbymD9AwwpMwPENpdspV
+      manageSubscriptionEmailPath: ''
+      manageSubscriptionEmailSubject: ''
+      manageSubscriptionRoute: ''
+      pluginLabel: Payments
+system:
+  edition: pro
+  live: true
+  name: my-craft-site
+  retryDuration: null
+  schemaVersion: 5.5.0.0
+  timeZone: Europe/Paris
+users:
+  allowPublicRegistration: true
+  deactivateByDefault: false
+  defaultGroup: ''
+  photoSubpath: null
+  photoVolumeUid: null
+  require2fa: false
+  requireEmailVerification: true
+  validateOnPublicRegistration: false

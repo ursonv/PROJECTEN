@@ -1,0 +1,134 @@
+{% extends '_shared/_layout.twig' %}
+
+{% block css %}
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--white);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 100%;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            max-width: 200px;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            font-family: var(--Poppins-font);
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--secondary-red);
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: var(--Ambit-font);
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        p {
+            margin-top: -1rem;
+            text-align: center;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: var(--Poppins-font);
+            font-size: 12px;
+        }
+
+        label {
+            font-size: 1rem;
+            font-family: var(--Ambit-font);
+            margin-left: 20px
+            color: var(--secondary-black);
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            width: 100%;
+            border: none;
+            border-top: 2px solid var(--primary-black);
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+<form method="post" accept-charset="UTF-8">
+    {{ csrfInput() }}
+    {{ actionInput('users/login') }}
+
+    
+    <img src="assets/LOGO.png" alt="HNO Assenede Logo">
+
+    <label for="loginName" style="display:none;">Username or email</label>
+    {{ input('text', 'loginName', craft.app.user.rememberedUsername, {
+        placeholder: 'Username or email',
+        id: 'loginName',
+        autocomplete: 'username'
+    }) }}
+
+    <label for="password" style="display:none;">Password</label>
+    {{ input('password', 'password', null, {
+        placeholder: 'Password',
+        id: 'password',
+    }) }}
+
+
+    <label>
+    {{ input('checkbox', 'rememberMe', '1') }}
+    Remember me
+    </label>
+
+    <button>Log in</button>
+
+    {% if errorMessage is defined %}
+    <p>{{ errorMessage }}</p>
+    {% endif %}
+
+<hr>
+<p><a href="{{ url('reset-password') }}">Password forgotten?</a></p>
+</form>
+{% endblock %}

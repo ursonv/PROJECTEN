@@ -1,0 +1,83 @@
+color: blue
+fieldLayouts:
+  0e6b25a5-fb91-4f38-920d-68b47ab93752:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2024-12-18T19:34:30+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: d5405368-4354-4404-9401-bd55ba696ef3
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-12-18T19:37:11+00:00'
+            elementCondition: null
+            fieldUid: e2384612-f76e-4b16-8af1-9da3e99283ba # Items
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 7765df2f-0218-4ac7-b11b-381866aaad3b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-12-18T19:57:58+00:00'
+            elementCondition: null
+            fieldUid: cb7a7eb9-bf0d-4680-9bf4-dfa9fcc16b5b # SVG
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cb8ac3fd-ebe6-4d20-b179-7ebf58925a7a
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: c04eb481-c576-4cec-a489-ebf832a7ff6e
+        userCondition: null
+handle: dashboard
+hasTitleField: true
+icon: table-columns
+name: Dashboard
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

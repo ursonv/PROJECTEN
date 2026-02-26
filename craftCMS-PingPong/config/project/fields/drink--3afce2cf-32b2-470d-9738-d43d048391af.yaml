@@ -1,0 +1,22 @@
+columnSuffix: null
+handle: drink
+instructions: null
+name: Drink
+searchable: false
+settings:
+  allowSelfRelations: false
+  branchLimit: null
+  maintainHierarchy: false
+  maxRelations: null
+  minRelations: null
+  selectionLabel: 'Add a drink'
+  showCardsInGrid: false
+  showSiteMenu: false
+  sources:
+    - 'section:ef158dca-4f7b-4a8d-bddd-0f01a88e4b8c' # Drinks
+  targetSiteId: null
+  validateRelatedElements: false
+  viewMode: list
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Entries

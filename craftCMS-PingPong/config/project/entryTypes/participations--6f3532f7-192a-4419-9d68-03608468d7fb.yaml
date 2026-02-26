@@ -1,0 +1,53 @@
+color: null
+fieldLayouts:
+  294cd489-8b53-4af6-bca9-3a683f95d272:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-01-07T21:32:11+00:00'
+            elementCondition: null
+            fieldUid: 1ae6ffbd-db4f-4e1d-832f-d47abbad3215 # User
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: ea8ea67f-a1bc-46b7-9a7c-8df83e23b988
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-07T21:32:11+00:00'
+            elementCondition: null
+            fieldUid: f06ec311-a9a6-41c1-9ee1-d9e34fe6aa82 # Status
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 3724940d-1d04-4ca3-beb7-efb8ad944933
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: a37d0f7b-6a70-4114-a3f7-6e8735fdf7d7
+        userCondition: null
+handle: participations
+hasTitleField: false
+icon: null
+name: Participations
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: '{p_user[0].username} - {p_status}'
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

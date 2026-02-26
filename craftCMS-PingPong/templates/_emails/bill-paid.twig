@@ -1,0 +1,24 @@
+<h1>Bill Update</h1>
+<p>Hi {{ bill.bill_user.one().username }},</p>
+<p>Your bill has been paid. Below is the bill:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in bill.bill_items.all() %}
+        {% set totalAmount = item.amount * item.price.amount %}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.price | money }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>Thank you for your purchase!</p>

@@ -1,0 +1,50 @@
+{% if not currentUser.admin %}
+    {% redirect '/login' %}
+{% endif %}
+{% extends '_shared/_layout.twig' %}
+
+{% block main %}
+{% embed '_shared/_titleheader.twig' %}
+  {% block page_title %}Create New Bill{% endblock %}
+{% endembed %}
+
+<main class="main-content">
+
+    <form method="post" action="" accept-charset="UTF-8">
+        {{ csrfInput() }}
+
+        <div>
+            <label for="userId">User</label>
+            <select id="userId" name="userId" required>
+                {% for user in craft.users.all() %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="status">Status</label>
+            <select id="status" name="status">
+                <option value="open">Open</option>
+                <option value="paid">Paid</option>
+            </select>
+        </div>
+
+        <div id="drinks-section">
+            <h2>Add Drinks</h2>
+            {% for drink in availableDrinks %}
+                <div>
+                    <input type="checkbox" id="drink-{{ drink.id }}" name="drinks[]" value="{{ drink.id }}">
+                    <label for="drink-{{ drink.id }}">{{ drink.title }} ({{ drink.price | money }})</label>
+                    <input type="number" name="quantities[]" min="1" placeholder="Quantity">
+                </div>
+            {% endfor %}
+        </div>
+
+        <div>
+            <button type="submit">Create Bill</button>
+        </div>
+    </form>
+</main>
+{% include '_shared/_navigation.twig' %}
+{% endblock %}

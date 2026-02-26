@@ -1,0 +1,21 @@
+columnSuffix: null
+handle: p_participants
+instructions: null
+name: Participants
+searchable: false
+settings:
+  createButtonLabel: null
+  defaultIndexViewMode: cards
+  entryTypes:
+    - 85afafc5-d2f9-4580-82d7-e75f0b7a9398 # Participants
+  includeTableView: false
+  maxEntries: 4
+  minEntries: null
+  pageSize: 50
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: cards
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix

@@ -1,0 +1,99 @@
+color: amber
+fieldLayouts:
+  acb5fa3e-cec4-4389-afa6-10a1a0cd7706:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2024-12-30T23:44:58+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: f7f56bd1-8e12-435b-86c5-74830a3b6981
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-12-30T23:46:32+00:00'
+            elementCondition: null
+            fieldUid: fbee3995-7978-4a88-a365-128ac4757d47 # Bill User
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: fc89cbca-f9fe-4b4c-850a-18da6b8a6cf5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-12-30T23:46:32+00:00'
+            elementCondition: null
+            fieldUid: b118554f-a665-48c5-aca1-41663a04e94f # Bill Items
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 49aeca16-4a3e-4ca5-bb40-28734e27a3e5
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-12-30T23:46:32+00:00'
+            elementCondition: null
+            fieldUid: 534cd3d8-8d75-4d6c-91e8-7c10ce619b57 # Bill Status
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cf3ffe09-a6f6-4077-801b-bbf2023bd137
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 44ac8546-daa3-4dd0-b87b-265bd25a7e2f
+        userCondition: null
+handle: bill
+hasTitleField: true
+icon: album
+name: Bill
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

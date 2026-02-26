@@ -1,0 +1,67 @@
+color: null
+fieldLayouts:
+  12fdd37f-b635-4e2e-be03-3e8096702543:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2025-01-10T17:33:15+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            required: true
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 4e656c22-255d-491d-aa1d-41e8468b67b7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-01-10T17:40:37+00:00'
+            elementCondition: null
+            fieldUid: 3222a852-41fb-4b95-ac37-b08411a22439 # Stash User
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: e8fcdbfd-6a5e-428a-a686-1e626fa3d434
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 82e62be0-5350-4606-bca4-659ca28642aa
+        userCondition: null
+handle: stash
+hasTitleField: true
+icon: null
+name: Stash
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

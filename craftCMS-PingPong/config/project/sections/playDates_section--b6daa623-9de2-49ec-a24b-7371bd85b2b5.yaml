@@ -1,0 +1,40 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  - 25f7a1e2-a2f5-4dc8-a149-5b6c69abba64 # TeamA
+  - 73c51156-4159-494b-a2d9-dbe8cf794a05 # TeamB
+  - 31404bea-37b1-4faf-98f4-144da8239cb0 # TeamC
+handle: playDates_section
+maxAuthors: 1
+name: 'Play Dates'
+previewTargets:
+  -
+    __assoc__:
+      -
+        - label
+        - 'Primary entry page'
+      -
+        - urlFormat
+        - '{url}'
+      -
+        - refresh
+        - '1'
+  -
+    __assoc__:
+      -
+        - label
+        - Teams
+      -
+        - urlFormat
+        - play-dates/<teamType>
+      -
+        - refresh
+        - '1'
+propagationMethod: all
+siteSettings:
+  7d96a7b3-c138-4ef4-96f8-afb1d8b50a71: # my-craft-site
+    enabledByDefault: true
+    hasUrls: true
+    template: play-dates/index.twig
+    uriFormat: '{slug}'
+type: channel
